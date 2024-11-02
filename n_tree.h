@@ -10,13 +10,15 @@
 typedef struct s_node
 {
     int value;
+    int id_mouvement;
     int depth;
     struct s_node **sons; //tableau de pointeur
-    int nbSons; //taille physique du tableau
+    int ndSons; //taille physique du tableau
+    int *avails; //choix restants du noeud
 }t_node;
 
-t_node *createNode(int val, int nd_sons);
-void insertNode(t_node nodeToAdd);
+t_node *createNode(int val, int mvt, int nd_sons, int* list_choix, int depth);
+void insertNode(t_node node);
 void deleteNode(t_node nodeToDelete);
 void displayNode(t_node nodeToDisplay);
 
@@ -28,8 +30,11 @@ t_tree *createEmptyTree();
 void deleteTree();
 void displayTree(t_tree tree);
 
+t_tree createNTree(t_node *node); //créé un arbre n-aire de déplacements à partir d'un t_node
 
+int *removeFromList(int*, int, int);
 
+void printNTree(t_tree tree);
 
 
 

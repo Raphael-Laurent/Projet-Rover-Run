@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "map.h"
+#include "n_tree.h"
 
 int main() {
     t_map map;
@@ -32,5 +33,16 @@ int main() {
         printf("\n");
     }
     displayMap(map);
-    return 0;
+
+
+
+    // -----TEST------------------------------------------------------------------
+    int avails[5] = {1,2,3,4,5};
+    t_node *root = createNode(0,0, 5, avails, 0);
+    t_tree mytree = createNTree(root);
+
+        // Affichage de l'arbre
+    printf("Arbre n-aire:\n");
+    printNTree(mytree);
+
 }
