@@ -3,7 +3,7 @@ project(untitled1 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(untitled1 main.c
+add_executable(main main.c
         loc.c
         loc.h
         moves.c
@@ -13,4 +13,6 @@ add_executable(untitled1 main.c
         queue.c
         queue.h
         stack.c
-        stack.h)
+        stack.h
+        n_tree.c
+        n_tree.h)

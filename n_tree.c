@@ -54,7 +54,7 @@ t_tree createNTree(t_node* node) {
      * pour l'instant, les noeuds auront la valeur de l'id mouvement
      * créer à une depth plus grande que 3 fait cracher l'affichage :((
      */
-     if (node->depth < 3) {
+     if (node->depth < 5) {
          int i;
          for (i = 0; i < node->ndSons; i++) {
              t_node *new_son = createNode(node->avails[i], node->avails[i], node->ndSons - 1 , node->avails, node->depth + 1);
@@ -85,6 +85,6 @@ void printNTree(t_tree tree) {
     for (int i = 0; i < tree.root->ndSons; i++) {
         t_tree new_tree;
         new_tree.root = tree.root->sons[i];
-        printTree(new_tree);
+        printNTree(new_tree);
     }
 }
