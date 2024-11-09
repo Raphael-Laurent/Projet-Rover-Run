@@ -37,9 +37,10 @@ int main() {
 
 
     // -----TEST------------------------------------------------------------------
-    int avails[5] = {1,2,3,4,5};
+    //map.costs = les coûts
+    t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
     t_node *root = createNode(0,0, 5, avails, 0);
-    t_tree mytree = createNTree(root);
+    t_tree mytree = createNTree(root, 5);
 
         // Affichage de l'arbre
     printf("Arbre n-aire:\n");
