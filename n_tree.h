@@ -1,5 +1,5 @@
 //
-// Created by HugoW on 28/10/2024.
+// Created by H on 28/10/2024.
 //
 
 #ifndef UNTITLED1_N_TREE_H
@@ -31,9 +31,9 @@ t_tree *createEmptyTree();
 void deleteTree();
 void displayTree(t_tree tree);
 
-t_tree createNTree(t_node *node, int size); //créé un arbre n-aire de déplacements à partir d'un t_node
+t_tree createNTree(t_node *node, int size); //créer un arbre n-aire de déplacements à partir d'un t_node
 
-t_move *removeFromList(t_move*, int, int);
+t_move *removeFromList(t_move*, int val, int listLength);
 
 void printNTree(t_tree tree);
 

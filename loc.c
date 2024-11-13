@@ -4,6 +4,7 @@
 
 #include "loc.h"
 
+
 t_localisation loc_init(int x, int y, t_orientation ori)
 {
     t_localisation loc;
@@ -11,6 +12,13 @@ t_localisation loc_init(int x, int y, t_orientation ori)
     loc.pos.y = y;
     loc.ori = ori;
     return loc;
+}
+
+t_localisation randomLoc(t_map map){
+    int x = rand()%map.x_max+1;
+    int y = rand()%map.y_max+1;
+    t_localisation localisation= loc_init(x,y, NORTH);
+    return localisation;
 }
 
 int isValidLocalisation(t_position loc, int x_max, int y_max)

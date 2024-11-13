@@ -4,6 +4,9 @@
 
 #ifndef UNTITLED1_LOC_H
 #define UNTITLED1_LOC_H
+#include "time.h"
+#include "map.h"
+#include "stdlib.h"
 
 /**
  * @brief Enum for the orientation of the robot (NORTH, EAST, SOUTH, WEST)
@@ -42,6 +45,8 @@ typedef struct s_localisation
  * @return the localisation of the robot
  */
 t_localisation loc_init(int, int, t_orientation);
+
+t_localisation randomLoc(t_map map);
 
 /**
  * @brief Function to check a valid position for the robot
