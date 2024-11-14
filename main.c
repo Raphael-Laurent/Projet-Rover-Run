@@ -35,29 +35,23 @@ int main() {
     displayMap(map);
 
 
-    printf("supposed to be north : %s\n", getOriAsString(NORTH));
-    printf("supposed to be T right : %s\n", getMoveAsString(T_RIGHT));
-    char *south = getOriAsString(SOUTH);
-    printf("supposed to be south : %s",south);
-
-
-    printf("%d",map.costs[0][4]);
+    printf("%d",map.costs[4][2]);
     t_localisation ruver;
-    ruver = loc_init(0,4, SOUTH); //on initialise la position du rover
+    ruver = loc_init(1,4, EAST); //on initialise la position du rover
     printLocalisation(ruver, map);
     ruver = move(ruver, F_10);
     printLocalisation(ruver, map);
-    ruver = loc_init(4,0,SOUTH);
+    ruver = loc_init(1,4,NORTH);
     printLocalisation(ruver, map);
 
 
-    /*
+
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
     t_localisation rover;
-    rover = loc_init(5, 1, NORTH); //on initialise la position du rover
-    t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
+    rover = loc_init(1, 4, NORTH); //on initialise la position du rover
+    t_move avails[9] = {F_10, F_20, F_10, T_RIGHT, U_TURN};
     t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
     t_tree mytree = createNTree(root, 3, rover, map);
 
@@ -65,5 +59,5 @@ int main() {
     printf("Arbre n-aire:\n");
     printNTree(mytree);
 
-    */
+
 }

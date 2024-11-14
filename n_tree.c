@@ -54,29 +54,33 @@ t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
      */
      if (node->depth < size) { // l'arbre est de taille 5 (5 mouvements par phase)
          int i;
+         printf("\n");
          for (i = 0; i < node->ndSons; i++) {
 
              //static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};
              // nouvelle position utilisant le mouvement avails[i]
              t_localisation new_loc;
              new_loc = move(loc, node->avails[i]);
-             printf("%d %d  -  ", new_loc.pos.x, new_loc.pos.y);
+//             printLocalisation(node->local, map);
+//             printLocalisation(new_loc, map);
 
-             //valeur de la case de la nouvelle position
-             int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
+//             if (new_loc.pos.x > 0 && new_loc.pos.x < 6 && new_loc.pos.y > 0 && new_loc.pos.y < 7){
+                 //valeur de la case de la nouvelle position
+                 int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
+                 //on créé une nouvelle liste avails sans la valeur avails[i] pour le prochain fils
+                 t_move *new_avails;
+                 new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
 
-             //on créé une nouvelle liste avails sans la valeur avails[i] pour le prochain fils
-             t_move *new_avails;
-             new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
+                 // on créé un nouveau fils du noeud
+                 t_node *new_son = createNode( node->value + new_val, node->ndSons - 1 , new_avails, node->depth + 1, new_loc);
+                 node->sons[i] = new_son;
 
-             // on créé un nouveau fils du noeud
-             t_node *new_son = createNode( new_val, node->ndSons - 1 , new_avails, node->depth + 1, new_loc);
-             node->sons[i] = new_son;
+                 // et on appelle récursivement la fonction pour créer les fils des fils
+                 createNTree(new_son, size - 1, new_loc, map);
+             }
 
-             // et on appelle récursivement la fonction pour créer les fils des fils
-             createNTree(new_son, size - 1, new_loc, map);
-         }
-         printf("stop\n");
+
+//         }
      }
 
     t_tree tree;
@@ -86,8 +90,6 @@ t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
 
 void printNTree(t_tree tree) {
     if (tree.root == NULL) return;
-
-    printf("%d",tree.root->ndSons);
 
     // Indenter en fonction de la profondeur actuelle
     for (int i = 0; i < tree.root->depth; i++) {
@@ -103,14 +105,4 @@ void printNTree(t_tree tree) {
         new_tree.root = tree.root->sons[i];
         printNTree(new_tree);
     }
-}
-
-void parcoursNTree(t_tree tree){
-    /**
-     * @brief : parcours préfixe d'un arbre
-     * @param tree : arbre n-aire
-     */
-     t_node* temp;
-     temp = tree.root;
-
 }
