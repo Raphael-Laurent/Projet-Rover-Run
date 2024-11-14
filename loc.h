@@ -9,7 +9,7 @@
 
 
 // liste de chaîne de charactères qui renvoie à des orientations (à utiliser pour l'affichage)
-static char _oris[4][8] = {"NORTH", "WEST", "SOUTH", "WEST"};
+static char _oris[4][8] = {"NORTH", "EAST", "SOUTH", "WEST"};
 
 /**
  * @brief Enum for the orientation of the robot (NORTH, EAST, SOUTH, WEST)

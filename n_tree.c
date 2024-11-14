@@ -49,24 +49,50 @@ t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_locali
 
 
 t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
-    if (node->depth < size) {
-        for (int i = 0; i < node->ndSons; i++) {
-            t_localisation new_loc = move(loc, node->avails[i]);
+    /**
+     * @brief fonction récursive qui créée un arbre à partir du noeud racine
+     * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
+     * @param node : noeud
+     * @param size : taille de l'arbre
+     */
+     if (node->depth < size) { // l'arbre est de taille 5 (5 mouvements par phase)
+         int i;
+         printf("\n");
+         for (i = 0; i < node->ndSons; i++) {
 
-            if (new_loc.pos.x >= 0 && new_loc.pos.x < map.x_max &&
-                new_loc.pos.y >= 0 && new_loc.pos.y < map.y_max) {
-                int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
-                if (new_val >= 1010){
-                    continue;
-                }
-                t_move *new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
-                t_node *new_son = createNode(new_val, node->ndSons - 1, new_avails, node->depth + 1, new_loc);
-                node->sons[i] = new_son;
-                createNTree(new_son, size, new_loc, map);
-                free(new_avails);
-            }
-        }
-    }
+             //static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};
+             // nouvelle position utilisant le mouvement avails[i]
+             t_localisation new_loc;
+             new_loc = move(loc, node->avails[i]);
+//             printLocalisation(node->local, map);
+//             printLocalisation(new_loc, map);
+
+//             if (new_loc.pos.x > 0 && new_loc.pos.x < 6 && new_loc.pos.y > 0 && new_loc.pos.y < 7){
+                 //valeur de la case de la nouvelle position
+                 int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
+           
+                 if (new_val >= 1010){
+                          continue;
+                      }
+                 //on créé une nouvelle liste avails sans la valeur avails[i] pour le prochain fils
+                 t_move *new_avails;
+                 new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
+
+                 // on créé un nouveau fils du noeud
+                 t_node *new_son = createNode( node->value + new_val, node->ndSons - 1 , new_avails, node->depth + 1, new_loc);
+                 node->sons[i] = new_son;
+
+                 // et on appelle récursivement la fonction pour créer les fils des fils
+                 createNTree(new_son, size - 1, new_loc, map);
+                 
+                 free(new_avails);
+
+             }
+
+
+//         }
+     }
+
     t_tree tree;
     tree.root = node;
     return tree;
@@ -76,13 +102,13 @@ t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
 
 void printNTree(t_tree tree) {
     if (tree.root == NULL) return;
-    printf("%d",tree.root->ndSons);
     // Indenter en fonction de la profondeur actuelle
     for (int i = 0; i < tree.root->depth; i++) {
         printf("    ");  // Ajoute 4 espaces pour chaque niveau de profondeur
     }
     // Afficher la loc et la value du nœud
     printf("loc : %d/%d//%s ; value : %d\n", tree.root->local.pos.x,tree.root->local.pos.y,getOriAsString(tree.root->local.ori),tree.root->value);
+
     // Afficher récursivement chaque enfant avec une profondeur augmentée
     for (int i = 0; i < tree.root->ndSons; i++) {
         t_tree new_tree;

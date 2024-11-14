@@ -37,6 +37,18 @@ int main() {
     }
     displayMap(map);
 
+
+    printf("%d",map.costs[4][2]);
+    t_localisation ruver;
+    ruver = loc_init(1,4, EAST); //on initialise la position du rover
+    printLocalisation(ruver, map);
+    ruver = move(ruver, F_10);
+    printLocalisation(ruver, map);
+    ruver = loc_init(1,4,NORTH);
+    printLocalisation(ruver, map);
+
+
+
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
@@ -45,7 +57,8 @@ int main() {
     t_move avails[7] = {F_10, F_20,B_10,T_RIGHT,U_TURN, F_30, T_LEFT};
     t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover);
     t_tree mytree = createNTree(root, 7, rover, map);
-    // Affichage de l'arbre
+
+        // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
     //parcoursNTree(mytree);
@@ -59,4 +72,5 @@ int main() {
     printPath(current_path, path_length);
 
     return 0;
+
 }
