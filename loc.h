@@ -8,6 +8,9 @@
 #include "map.h"
 #include "stdlib.h"
 
+// liste de chaîne de charactères qui renvoie à des orientations (à utiliser pour l'affichage)
+static char _oris[4][5] = {"NORTH", "SOUTH", "EAST", "WEST"};
+
 /**
  * @brief Enum for the orientation of the robot (NORTH, EAST, SOUTH, WEST)
  */
@@ -84,5 +87,18 @@ t_position UP(t_position);
  * @return the DOWN position
  */
 t_position DOWN(t_position);
+
+/**
+ * @brief get the orientations as string for output
+ * @param ori : the orientation
+ * @return as string
+ */
+char *getOriAsString(t_orientation ori);
+
+/**
+ * @brief print a t_localisation
+ * @param loc : the localisation that is printed
+ */
+void printLocalisation(t_localisation loc);
 
 #endif //UNTITLED1_LOC_H

@@ -58,3 +58,12 @@ t_position DOWN(t_position pos)
     return new_pos;
 }
 
+char *getOriAsString(t_orientation ori)
+{
+    return _oris[ori];
+}
+
+void printLocalisation(t_localisation loc){
+    printf("x : %d \ny : %d\norientation : %s\nval : ",loc.pos.x, loc.pos.y, getOriAsString(loc.ori));
+    return;
+}

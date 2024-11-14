@@ -1,11 +1,12 @@
 //
-// Created by H on 28/10/2024.
+// Created by HugoW on 28/10/2024.
 //
 
 #ifndef UNTITLED1_N_TREE_H
 #define UNTITLED1_N_TREE_H
 #include "loc.h"
 #include "moves.h"
+#include "map.h"
 
 
 typedef struct s_node
@@ -13,7 +14,7 @@ typedef struct s_node
     int value;//coût du déplacement
     int depth;//profondeur du noeud dans son arbre
     struct s_node **sons; //tableau de pointeur
-    int ndSons; //taille physique du tableau
+    int ndSons; //taille physique du tableau sons (et aussi avails)
     t_move *avails; //choix restants du noeud
     t_localisation local; // localisation du robot sur la map au "moment" du noeud
 }t_node;
@@ -32,9 +33,9 @@ void deleteNode(t_node *node);
 void deleteTree(t_tree *tree);
 void displayTree(t_tree tree);
 
-t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map);//créer un arbre n-aire de déplacements à partir d'un t_node
+t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map); //créé un arbre n-aire de déplacements à partir d'un t_node
 
-t_move *removeFromList(t_move*, int val, int listLength);
+t_move *removeFromList(t_move*, t_move, int);
 
 void printNTree(t_tree tree);
 

@@ -38,19 +38,31 @@ int main() {
     displayMap(map);
     printf("\n");
 
+    t_localisation ruver;
+
+    printf("%s ", getOriAsString(NORTH));
+    printf("%s\n", getMoveAsString(T_RIGHT));
+
+
+    ruver = loc_init(5, 1, NORTH); //on initialise la position du rover
+    printLocalisation(ruver);
+    ruver = move(ruver, F_10);
+    printf("F_10 : \n");
+    printLocalisation(ruver);
+
 
 
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
-    t_move avails[] = {F_10, F_20, F_30, B_10, T_LEFT, T_RIGHT, U_TURN};
-    t_localisation  location = randomLoc(map);
-    int initial_cost = map.costs[location.pos.x][location.pos.y];
-    int numberOfSons = sizeof(avails) / sizeof(avails[0]);
-    t_node *root = createNode(initial_cost, numberOfSons, avails, 0, location);
-    t_tree mytree = createNTree(root, 5, location, map);
 
-    // Affichage de l'arbre
-    //printf("Arbre n-aire:\n");
+    t_localisation rover;
+    rover = loc_init(5, 1, NORTH); //on initialise la position du rover
+    t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
+    t_tree mytree = createNTree(root, 3, rover, map);
+
+        // Affichage de l'arbre
+    printf("Arbre n-aire:\n");
     printNTree(mytree);
     //parcoursNTree(mytree);
     int min_cost = INT_MAX;
@@ -62,4 +74,3 @@ int main() {
     //printf("Smallest cost : (%d) :\n", min_cost);
     //printPath(min_path);
 }
-
