@@ -59,10 +59,10 @@ int main() {
     //map.costs = les coûts
 
     t_localisation rover;
-    rover = loc_init(5, 1, NORTH); //on initialise la position du rover
-    t_move avails[5] = {F_10, F_20,B_10,T_RIGHT,U_TURN};
-    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
-    t_tree mytree = createNTree(root, 5, rover, map);
+    rover = loc_init(3, 3, NORTH); //on initialise la position du rover
+    t_move avails[7] = {F_10, F_20,B_10,T_RIGHT,U_TURN, F_30, T_LEFT};
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover);
+    t_tree mytree = createNTree(root, 7, rover, map);
     // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
@@ -75,4 +75,6 @@ int main() {
     findMinCostPath(root, 0, &min_cost, &min_path, &path_length, current_path, 0);
     printf("Smallest cost: %d\n", min_cost);
     printPath(current_path, path_length);
+
+    return 0;
 }
