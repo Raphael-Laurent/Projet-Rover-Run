@@ -14,14 +14,17 @@ t_move *removeFromList(t_move *list, t_move val, int len_list){
      * @param val : valeur que l'on veut retirer de la liste
      * @param len_list : longueur de la liste
      */
-    t_move* new_list = (t_move*)malloc(sizeof(t_move)*(len_list - 1));
-    int i, j;
-    j = 0;
-    for (i = 0; i < len_list; i++) {
-        if (val != list[i]) {
-            new_list[j] = list[i];
-            j++;
-        }
+    if (len_list <= 0) {
+        return list;
+    }
+    int newLength = len_list;
+    t_move *new_list = (t_move *)malloc(newLength * sizeof(t_move));
+    if (new_list == NULL) {
+        printf("Fail :c\n");
+        return NULL;
+    }
+    for (int i = 0; i < len_list; i++) {
+        new_list[i] = list[i];
     }
     return new_list;
 }

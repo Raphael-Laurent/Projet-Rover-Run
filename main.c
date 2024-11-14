@@ -57,9 +57,9 @@ int main() {
 
     t_localisation rover;
     rover = loc_init(5, 1, NORTH); //on initialise la position du rover
-    t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
+    t_move avails[5] = {F_10, F_20,B_10,T_RIGHT,U_TURN};
     t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
-    t_tree mytree = createNTree(root, 10, rover, map);
+    t_tree mytree = createNTree(root, 5, rover, map);
 
         // Affichage de l'arbre
     printf("Arbre n-aire:\n");
@@ -69,8 +69,8 @@ int main() {
     t_node *min_path = NULL;
     int path_length = 0;
 
-    //findMinCostPath(root, 0, &min_cost, &min_path, &path_length);
+    findMinCostPath(root, 0, &min_cost, &min_path, &path_length);
 
-    //printf("Smallest cost : (%d) :\n", min_cost);
-    //printPath(min_path);
+    printf("Smallest cost : (%d) :\n", min_cost);
+    printPath(min_path);
 }
