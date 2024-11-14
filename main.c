@@ -2,8 +2,8 @@
 #include "map.h"
 #include "n_tree.h"
 #include "moves.h"
-
-
+#include "stdlib.h"
+#include "time.h"
 int main() {
     t_map map;
 
@@ -37,18 +37,21 @@ int main() {
     }
     displayMap(map);
     printf("\n");
+    printf("supposed to be north : %s\n", getOriAsString(NORTH));
+    printf("supposed to be T right : %s\n", getMoveAsString(T_RIGHT));
+    char *south = getOriAsString(SOUTH);
+    printf("supposed to be south : %s",south);
 
+
+    printf("%d",map.costs[0][4]);
     t_localisation ruver;
-
-    printf("%s ", getOriAsString(NORTH));
-    printf("%s\n", getMoveAsString(T_RIGHT));
-
-
-    ruver = loc_init(5, 1, NORTH); //on initialise la position du rover
-    printLocalisation(ruver);
+    ruver = loc_init(0,4, SOUTH); //on initialise la position du rover
+    printLocalisation(ruver, map);
     ruver = move(ruver, F_10);
-    printf("F_10 : \n");
-    printLocalisation(ruver);
+    printLocalisation(ruver, map);
+    ruver = loc_init(4,0,SOUTH);
+    printLocalisation(ruver, map);
+
 
 
 
@@ -60,17 +63,16 @@ int main() {
     t_move avails[5] = {F_10, F_20,B_10,T_RIGHT,U_TURN};
     t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
     t_tree mytree = createNTree(root, 5, rover, map);
-
-        // Affichage de l'arbre
+    // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
     //parcoursNTree(mytree);
+
     int min_cost = INT_MAX;
-    t_node *min_path = NULL;
+    t_node* min_path = NULL;
     int path_length = 0;
-
-    findMinCostPath(root, 0, &min_cost, &min_path, &path_length);
-
-    printf("Smallest cost : (%d) :\n", min_cost);
-    printPath(min_path);
+    t_node* current_path[10]; //profondeur max
+    findMinCostPath(root, 0, &min_cost, &min_path, &path_length, current_path, 0);
+    printf("Smallest cost: %d\n", min_cost);
+    printPath(current_path, path_length);
 }

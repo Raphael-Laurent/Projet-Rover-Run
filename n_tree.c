@@ -17,14 +17,16 @@ t_move *removeFromList(t_move *list, t_move val, int len_list){
     if (len_list <= 0) {
         return list;
     }
-    int newLength = len_list;
-    t_move *new_list = (t_move *)malloc(newLength * sizeof(t_move));
+    t_move *new_list = (t_move *)malloc((len_list - 1) * sizeof(t_move));
     if (new_list == NULL) {
         printf("Fail :c\n");
         return NULL;
     }
+    int j = 0;
     for (int i = 0; i < len_list; i++) {
-        new_list[i] = list[i];
+        if (list[i] != val) {
+            new_list[j++] = list[i];
+        }
     }
     return new_list;
 }
@@ -69,6 +71,7 @@ t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
              node->sons[i] = new_son;
              // et on appelle récursivement la fonction pour créer les fils des fils
              createNTree(new_son, size - 1, new_loc, map);
+             free(new_avails);
          }
      }
     t_tree tree;
@@ -84,7 +87,7 @@ void printNTree(t_tree tree) {
         printf("    ");  // Ajoute 4 espaces pour chaque niveau de profondeur
     }
     // Afficher la loc et la value du nœud
-    printf("loc : %d/%d//%s ; value : %d\n", tree.root->local.pos.x,tree.root->local.pos.y,tree.root->local.ori,tree.root->value);
+    printf("loc : %d/%d//%s ; value : %d\n", tree.root->local.pos.x,tree.root->local.pos.y,getOriAsString(tree.root->local.ori),tree.root->value);
     // Afficher récursivement chaque enfant avec une profondeur augmentée
     for (int i = 0; i < tree.root->ndSons; i++) {
         t_tree new_tree;
@@ -109,34 +112,37 @@ void parcoursNTree(t_tree tree) {
     }
 }
 
-void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length) {
+void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, int depth) {
     if (node == NULL) return;
+
     current_cost += node->value;
+    current_path[depth] = node;
     if (node->ndSons == 0) {
         if (current_cost < *min_cost) {
             *min_cost = current_cost;
             *min_path = node;
-            *path_length = node->depth + 1;  // Update path length to include this node
+            *path_length = depth + 1;
         }
     }
     for (int i = 0; i < node->ndSons; i++) {
-        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length);
+        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, depth + 1);
     }
 }
 
-void printPath(t_node* node) {
-    if (node == NULL) {
-        printf("No path found >:c.\n");
+void printPath(t_node** path, int path_length) {
+    if (path_length == 0) {
+        printf("No path found.\n");
         return;
     }
-    printf("Cost: %d\n", node->value);
-    if (node->ndSons == 0) {
-        return;
+
+    printf("Optimal path with minimum cost:\n");
+    for (int i = 0; i < path_length; i++) {
+        printf("Node %d -> ", path[i]->value);
     }
-    for (int i = 0; i < node->ndSons; i++) {
-        printPath(node->sons[i]);
-    }
+    printf("End\n");
 }
+
+
 
 void deleteTree(t_tree* tree) {
     if (tree == NULL || tree->root == NULL) return;

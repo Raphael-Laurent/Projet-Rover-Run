@@ -4,7 +4,6 @@
 
 #include "loc.h"
 
-
 t_localisation loc_init(int x, int y, t_orientation ori)
 {
     t_localisation loc;
@@ -12,13 +11,6 @@ t_localisation loc_init(int x, int y, t_orientation ori)
     loc.pos.y = y;
     loc.ori = ori;
     return loc;
-}
-
-t_localisation randomLoc(t_map map){
-    int x = rand()%map.x_max+1;
-    int y = rand()%map.y_max+1;
-    t_localisation localisation= loc_init(x,y, NORTH);
-    return localisation;
 }
 
 int isValidLocalisation(t_position loc, int x_max, int y_max)
@@ -63,7 +55,6 @@ char *getOriAsString(t_orientation ori)
     return _oris[ori];
 }
 
-void printLocalisation(t_localisation loc){
-    printf("x : %d \ny : %d\norientation : %s\nval : ",loc.pos.x, loc.pos.y, getOriAsString(loc.ori));
-    return;
+void printLocalisation(t_localisation loc, t_map map){
+    printf("\n-----------------------------------\nx : %d \ny : %d\norientation : %s\nval : %d\n",loc.pos.y, loc.pos.x, getOriAsString(loc.ori), map.costs[loc.pos.y][loc.pos.x]);
 }

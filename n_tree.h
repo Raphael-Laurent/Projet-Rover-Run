@@ -43,9 +43,8 @@ void printNTree(t_tree tree);
 
 void parcoursNTree(t_tree tree); //parcours préfixe d'un arbre n-aire
 
-void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length);
+void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, int depth);
 
-void printPath(t_node* node);
-
+void printPath(t_node** path, int path_length);
 
 #endif //UNTITLED1_N_TREE_H
