@@ -40,6 +40,7 @@ t_orientation rotate(t_orientation ori, t_move move)
             rst=2;
             break;
         default:
+            rst = 0; // rst restait non initialisé en default dans le code de base, 0 choisi  arbitrairement sinon ça plante pour moi // Yiannis
             break;
     }
     return (ori+rst)%4;
