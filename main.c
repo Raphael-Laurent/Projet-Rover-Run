@@ -35,30 +35,19 @@ int main() {
         }
         printf("\n");
     }
-    displayMap(map);
-
-
-    printf("%d",map.costs[4][2]);
-    t_localisation ruver;
-    ruver = loc_init(1,4, EAST); //on initialise la position du rover
-    printLocalisation(ruver, map);
-    ruver = move(ruver, F_10);
-    printLocalisation(ruver, map);
-    ruver = loc_init(1,4,NORTH);
-    printLocalisation(ruver, map);
-
-
+    //displayMap(map);
 
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
     t_localisation rover;
-    rover = loc_init(3, 3, NORTH); //on initialise la position du rover
+    printf("%d", map.costs[1][2]);
+    rover = loc_init(1, 2, NORTH); //on initialise la position du rover
     t_move avails[7] = {F_10, F_20,B_10,T_RIGHT,U_TURN, F_30, T_LEFT};
-    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover);
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover,  F_10);
     t_tree mytree = createNTree(root, 7, rover, map);
 
-        // Affichage de l'arbre
+    // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
     //parcoursNTree(mytree);
@@ -66,11 +55,11 @@ int main() {
     int min_cost = INT_MAX;
     t_node* min_path = NULL;
     int path_length = 0;
-    t_node* current_path[10]; //profondeur max
-    findMinCostPath(root, 0, &min_cost, &min_path, &path_length, current_path, 0);
+    t_node* current_path[10];  // Maximum depth
+    t_move current_moves[10];  // Array to track moves at each step
+    findMinCostPath(root, 0, &min_cost, &min_path, &path_length, current_path, current_moves, 0);
     printf("Smallest cost: %d\n", min_cost);
-    printPath(current_path, path_length);
-
+    printPath(current_moves, path_length);
     return 0;
 
 }
