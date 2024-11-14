@@ -35,14 +35,29 @@ int main() {
     displayMap(map);
 
 
+    printf("%d",map.costs[4][2]);
+    t_localisation ruver;
+    ruver = loc_init(1,4, EAST); //on initialise la position du rover
+    printLocalisation(ruver, map);
+    ruver = move(ruver, F_10);
+    printLocalisation(ruver, map);
+    ruver = loc_init(1,4,NORTH);
+    printLocalisation(ruver, map);
+
+
 
     // -----TEST------------------------------------------------------------------
-    int avails[5] = {1,2,3,4,5};
-    t_node *root = createNode(0,0, 5, avails, 0);
-    t_tree mytree = createNTree(root);
+    //map.costs = les coûts
+
+    t_localisation rover;
+    rover = loc_init(1, 4, NORTH); //on initialise la position du rover
+    t_move avails[9] = {F_10, F_20, F_10, T_RIGHT, U_TURN};
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
+    t_tree mytree = createNTree(root, 3, rover, map);
 
         // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
+
 
 }
