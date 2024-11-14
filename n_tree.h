@@ -29,7 +29,6 @@ typedef struct n_tree {
     t_node* root;
 } t_tree;
 
-t_tree *createEmptyTree();
 
 void deleteNode(t_node *node);
 

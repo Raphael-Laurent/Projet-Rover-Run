@@ -49,35 +49,31 @@ t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_locali
 
 
 t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
-    /**
-     * @brief fonction récursive qui créée un arbre à partir du noeud racine
-     * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
-     * @param node : noeud
-     * @param size : taille de l'arbre
-     */
-     if (node->depth < size) { // l'arbre est de taille 5 (5 mouvements par phase)
-         int i;
-         for (i = 0; i < node->ndSons; i++) {
-             // nouvelle position utilisant le mouvement avails[i]
-             t_localisation new_loc;
-             new_loc = move(loc, node->avails[i]);
-             //valeur de la case de la nouvelle position
-             int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
-             //on créé une nouvelle liste avails sans la valeur avails[i] pour le prochain fils
-             t_move *new_avails;
-             new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
-             // on créé un nouveau fils du noeud
-             t_node *new_son = createNode( new_val, node->ndSons - 1 , new_avails, node->depth + 1, new_loc);
-             node->sons[i] = new_son;
-             // et on appelle récursivement la fonction pour créer les fils des fils
-             createNTree(new_son, size - 1, new_loc, map);
-             free(new_avails);
-         }
-     }
+    if (node->depth < size) {
+        for (int i = 0; i < node->ndSons; i++) {
+            t_localisation new_loc = move(loc, node->avails[i]);
+
+            if (new_loc.pos.x >= 0 && new_loc.pos.x < map.x_max &&
+                new_loc.pos.y >= 0 && new_loc.pos.y < map.y_max) {
+                int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
+                if (new_val >= 1000){
+                    continue;
+                }
+                t_move *new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
+                t_node *new_son = createNode(new_val, node->ndSons - 1, new_avails, node->depth + 1, new_loc);
+                node->sons[i] = new_son;
+
+                createNTree(new_son, size, new_loc, map);
+                free(new_avails);
+            }
+        }
+    }
     t_tree tree;
     tree.root = node;
     return tree;
 }
+
+
 
 void printNTree(t_tree tree) {
     if (tree.root == NULL) return;
@@ -114,7 +110,6 @@ void parcoursNTree(t_tree tree) {
 
 void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, int depth) {
     if (node == NULL) return;
-
     current_cost += node->value;
     current_path[depth] = node;
     if (node->ndSons == 0) {
@@ -134,7 +129,6 @@ void printPath(t_node** path, int path_length) {
         printf("No path found.\n");
         return;
     }
-
     printf("Optimal path with minimum cost:\n");
     for (int i = 0; i < path_length; i++) {
         printf("Node %d -> ", path[i]->value);
@@ -145,9 +139,11 @@ void printPath(t_node** path, int path_length) {
 
 
 void deleteTree(t_tree* tree) {
-    if (tree == NULL || tree->root == NULL) return;
+    if (tree == NULL || tree->root == NULL) {
+        return;
+    }
     deleteNode(tree->root);
-    free(tree);
+    tree->root = NULL;
 }
 
 void deleteNode(t_node *node) {
@@ -159,3 +155,4 @@ void deleteNode(t_node *node) {
     free(node->avails);
     free(node);
 }
+
