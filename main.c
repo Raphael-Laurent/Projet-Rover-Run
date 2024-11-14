@@ -34,20 +34,24 @@ int main() {
     }
     displayMap(map);
 
+
+    printf("supposed to be north : %s\n", getOriAsString(NORTH));
+    printf("supposed to be T right : %s\n", getMoveAsString(T_RIGHT));
+    char *south = getOriAsString(SOUTH);
+    printf("supposed to be south : %s",south);
+
+
+    printf("%d",map.costs[0][4]);
     t_localisation ruver;
-
-    printf("%s ", getOriAsString(NORTH));
-    printf("%s\n", getMoveAsString(T_RIGHT));
-
-
-    ruver = loc_init(5, 1, NORTH); //on initialise la position du rover
-    printLocalisation(ruver);
+    ruver = loc_init(0,4, SOUTH); //on initialise la position du rover
+    printLocalisation(ruver, map);
     ruver = move(ruver, F_10);
-    printf("F_10 : \n");
-    printLocalisation(ruver);
+    printLocalisation(ruver, map);
+    ruver = loc_init(4,0,SOUTH);
+    printLocalisation(ruver, map);
 
 
-
+    /*
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
@@ -61,4 +65,5 @@ int main() {
     printf("Arbre n-aire:\n");
     printNTree(mytree);
 
+    */
 }
