@@ -95,7 +95,7 @@ void printNTree(t_tree tree) {
     }
 
     // Afficher la loc et la value du nœud
-    printf("loc : %d/%d//%s ; value : %d\n", tree.root->local.pos.x,tree.root->local.pos.y,tree.root->local.ori,tree.root->value);
+    printf("loc : %d/%d//%s ; value : %d\n", tree.root->local.pos.x,tree.root->local.pos.y, getOriAsString(tree.root->local.ori),tree.root->value);
 
     // Afficher récursivement chaque enfant avec une profondeur augmentée
     for (int i = 0; i < tree.root->ndSons; i++) {
