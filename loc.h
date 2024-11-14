@@ -7,6 +7,7 @@
 #include "time.h"
 #include "map.h"
 #include "stdlib.h"
+#include "stdio.h"
 
 // liste de chaîne de charactères qui renvoie à des orientations (à utiliser pour l'affichage)
 static char _oris[4][5] = {"NORTH", "SOUTH", "EAST", "WEST"};

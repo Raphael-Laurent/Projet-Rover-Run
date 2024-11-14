@@ -59,7 +59,7 @@ int main() {
     rover = loc_init(5, 1, NORTH); //on initialise la position du rover
     t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
     t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
-    t_tree mytree = createNTree(root, 3, rover, map);
+    t_tree mytree = createNTree(root, 10, rover, map);
 
         // Affichage de l'arbre
     printf("Arbre n-aire:\n");
