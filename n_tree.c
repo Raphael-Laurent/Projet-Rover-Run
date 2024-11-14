@@ -56,13 +56,12 @@ t_tree createNTree(t_node* node, int size, t_localisation loc, t_map map) {
             if (new_loc.pos.x >= 0 && new_loc.pos.x < map.x_max &&
                 new_loc.pos.y >= 0 && new_loc.pos.y < map.y_max) {
                 int new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
-                if (new_val >= 1000){
+                if (new_val >= 1010){
                     continue;
                 }
                 t_move *new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
                 t_node *new_son = createNode(new_val, node->ndSons - 1, new_avails, node->depth + 1, new_loc);
                 node->sons[i] = new_son;
-
                 createNTree(new_son, size, new_loc, map);
                 free(new_avails);
             }

@@ -36,24 +36,6 @@ int main() {
         printf("\n");
     }
     displayMap(map);
-    printf("\n");
-    printf("supposed to be north : %s\n", getOriAsString(NORTH));
-    printf("supposed to be T right : %s\n", getMoveAsString(T_RIGHT));
-    char *south = getOriAsString(SOUTH);
-    printf("supposed to be south : %s",south);
-
-
-    printf("%d",map.costs[0][4]);
-    t_localisation ruver;
-    ruver = loc_init(0,4, SOUTH); //on initialise la position du rover
-    printLocalisation(ruver, map);
-    ruver = move(ruver, F_10);
-    printLocalisation(ruver, map);
-    ruver = loc_init(4,0,SOUTH);
-    printLocalisation(ruver, map);
-
-
-
 
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
