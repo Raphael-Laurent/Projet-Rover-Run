@@ -43,12 +43,23 @@ int main() {
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
     t_move avails[] = {F_10, F_20, F_30, B_10, T_LEFT, T_RIGHT, U_TURN};
-    t_node *root = createNode(0,0, 5, avails, 0);
-    t_tree mytree = createNTree(root, 5);
+    t_localisation  location = randomLoc(map);
+    int initial_cost = map.costs[location.pos.x][location.pos.y];
+    int numberOfSons = sizeof(avails) / sizeof(avails[0]);
+    t_node *root = createNode(initial_cost, numberOfSons, avails, 0, location);
+    t_tree mytree = createNTree(root, 5, location, map);
 
     // Affichage de l'arbre
     //printf("Arbre n-aire:\n");
     printNTree(mytree);
+    //parcoursNTree(mytree);
+    int min_cost = INT_MAX;
+    t_node *min_path = NULL;
+    int path_length = 0;
 
+    //findMinCostPath(root, 0, &min_cost, &min_path, &path_length);
 
+    //printf("Smallest cost : (%d) :\n", min_cost);
+    //printPath(min_path);
 }
+
