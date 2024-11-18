@@ -56,6 +56,6 @@ char *getOriAsString(t_orientation ori)
 }
 
 void printLocalisation(t_localisation loc, t_map map){
-    printf("\n-----------------------------------\nx : %d \ny : %d\norientation : %s\nval : %d",loc.pos.y, loc.pos.x, getOriAsString(loc.ori), map.costs[loc.pos.y][loc.pos.x]);
-    return;
+  printf("\n-----------------------------------\nx : %d \ny : %d\norientation : %s\nval : %d\n",loc.pos.y, loc.pos.x, getOriAsString(loc.ori), map.costs[loc.pos.y][loc.pos.x]);
+  return;
 }

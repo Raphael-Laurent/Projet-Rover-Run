@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "map.h"
 #include "n_tree.h"
-
+#include "moves.h"
+#include "stdlib.h"
+#include "time.h"
 int main() {
     t_map map;
 
@@ -13,6 +15,7 @@ int main() {
 #else
     map = createMapFromFile("../maps/example1.map");
 #endif
+    srand(time(NULL));
 
     printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
     for (int i = 0; i < map.y_max; i++)
@@ -32,38 +35,31 @@ int main() {
         }
         printf("\n");
     }
-    displayMap(map);
+    //displayMap(map);
 
-
-    printf("supposed to be north : %s\n", getOriAsString(NORTH));
-    printf("supposed to be T right : %s\n", getMoveAsString(T_RIGHT));
-    char *south = getOriAsString(SOUTH);
-    printf("supposed to be south : %s",south);
-
-
-    printf("%d",map.costs[0][4]);
-    t_localisation ruver;
-    ruver = loc_init(0,4, SOUTH); //on initialise la position du rover
-    printLocalisation(ruver, map);
-    ruver = move(ruver, F_10);
-    printLocalisation(ruver, map);
-    ruver = loc_init(4,0,SOUTH);
-    printLocalisation(ruver, map);
-
-
-    /*
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
     t_localisation rover;
-    rover = loc_init(5, 1, NORTH); //on initialise la position du rover
-    t_move avails[9] = {F_10, F_30, T_LEFT, T_RIGHT, U_TURN};
-    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 5, avails, 0, rover);
-    t_tree mytree = createNTree(root, 3, rover, map);
+    printf("%d", map.costs[1][2]);
+    rover = loc_init(1, 2, NORTH); //on initialise la position du rover
+    t_move avails[7] = {F_10, F_20,B_10,T_RIGHT,U_TURN, F_30, T_LEFT};
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover,  F_10);
+    t_tree mytree = createNTree(root, 7, rover, map);
 
-        // Affichage de l'arbre
+    // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
+    //parcoursNTree(mytree);
 
-    */
+    int min_cost = INT_MAX;
+    t_node* min_path = NULL;
+    int path_length = 0;
+    t_node* current_path[10];  // Maximum depth
+    t_move current_moves[10];  // Array to track moves at each step
+    findMinCostPath(root, 0, &min_cost, &min_path, &path_length, current_path, current_moves, 0);
+    printf("Smallest cost: %d\n", min_cost);
+    printPath(current_moves, path_length);
+    return 0;
+
 }
