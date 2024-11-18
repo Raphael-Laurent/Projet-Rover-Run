@@ -18,6 +18,7 @@ typedef struct s_node
     int ndSons; //taille physique du tableau sons (et aussi avails)
     t_move *avails; //choix restants du noeud
     t_localisation local; // localisation du robot sur la map au "moment" du noeud
+    struct s_node *parent;
 }t_node;
 
 t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_localisation loc, t_move mov);
