@@ -47,4 +47,6 @@ void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min
 
 void printPath(t_move* moves, int path_length);
 
+t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
+
 #endif //UNTITLED1_N_TREE_H
