@@ -32,6 +32,16 @@ t_move *removeFromList(t_move *list, t_move val, int len_list) {
 }
 
 t_node *createNode(int val, int nd_sons, t_move *list_choix, int depth, t_localisation loc, t_move mov) {
+    /**
+     * @brief fonction récursive qui créée un arbre à partir du noeud racine
+     * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
+     * @param val : valeur à insérer
+     * @param nd_sons : nombre de fils à créer
+     * @param list_choix : liste de choix de mouvements
+     * @param depth : profondeur du noeud
+     * @param loc : localisation du rover
+     * @param mov : mouvement réalisé
+    */
     t_node *new_node;
     new_node = (t_node *) malloc(sizeof(t_node));
     new_node->value = val;
@@ -55,8 +65,10 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
      * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
      * @param node : noeud
      * @param size : taille de l'arbre
+     * @param map : map des coûts
      */
-    if ((node->value < 1000 && node->value != 0) && node->depth < size){// l'arbre est de taille 5 (5 mouvements par phase)
+    if ((node->value < 1000 && node->value != 0) &&
+        node->depth < size) {// l'arbre est de taille 5 (5 mouvements par phase)
         int i;
         printf("\n");
         for (i = 0; i < node->ndSons; i++) {
@@ -133,7 +145,8 @@ void parcoursNTree(t_tree tree) {
     }
 }
 
-void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min_path, int *path_length, t_node **current_path, t_move *current_moves, int depth) {
+void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min_path, int *path_length,
+                     t_node **current_path, t_move *current_moves, int depth) {
     if (node == NULL) { return; }
 
     current_cost += node->value;
@@ -149,21 +162,19 @@ void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min
 
     for (int i = 0; i < node->ndSons; i++) {
         current_moves[depth] = node->avails[i];  // Record move leading to child
-        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, current_moves,depth + 1);
+        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, current_moves,
+                        depth + 1);
     }
 }
 
-t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
-
-    printf("Node y : %d ||| ", current_node->local.pos.y);
+t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map) {
     t_localisation current_loc, min_loc;
     current_loc = current_node->local;
     min_loc = min_node->local;
-    if(!isValidLocalisation(current_node->local.pos,6,7)){
+    if (!isValidLocalisation(current_node->local.pos, 6, 7)) {
         return min_node;
-    }else if(current_node->ndSons == 0){
-        printf("dnSons == 0 ||| %d %d : %d ||| ",current_node->local.pos.x,current_node->local.pos.y,map.costs[current_loc.pos.x][current_loc.pos.y]);
-        if(map.costs[current_loc.pos.x][current_loc.pos.y] < map.costs[min_loc.pos.x][min_loc.pos.y]){
+    } else if (current_node->ndSons == 0) {
+        if (map.costs[current_loc.pos.x][current_loc.pos.y] < map.costs[min_loc.pos.x][min_loc.pos.y]) {
             min_node = current_node;
         }
     } else {
@@ -171,7 +182,6 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
             min_node = minLocalisation(current_node->sons[i], min_node, map);
         }
     }
-    printf("min y : %d %d\n",min_node->local.pos.x,min_node->local.pos.y);
     return min_node;
 }
 
