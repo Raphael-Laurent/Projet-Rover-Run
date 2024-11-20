@@ -42,18 +42,29 @@ int main() {
     //map.costs = les coûts
 
     t_localisation rover;
-    printf("%d", map.costs[4][2]);
-    rover = loc_init(4,2, NORTH); //on initialise la position du rover
-    t_move avails[7] = {F_10, F_20,B_10,T_RIGHT,U_TURN, F_30, T_LEFT};
-    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 7, avails, 0, rover, F_10);
-    t_tree mytree = createNTree(root, 5, rover, map);
+    printf("%d", map.costs[2][2]);
+    t_localisation new_loc, old_loc;
+    old_loc.pos.x = 2;
+    old_loc.pos.y = 2;
+    old_loc.ori = NORTH;
+    new_loc = move(old_loc, F_10);
+    printf("%d",map.costs[new_loc.pos.y][new_loc.pos.x]);
+    rover = loc_init(2,2, NORTH); //on initialise la position du rover
+    t_move avails[7] = {F_10, F_20,B_10,F_30};
+    t_node *root = createNode(map.costs[rover.pos.x][rover.pos.y], 4, avails, 0, rover, F_10);
+    t_tree mytree = createNTree(root, 3, rover, map);
 
     // Affichage de l'arbre
     printf("Arbre n-aire:\n");
     printNTree(mytree);
 
+    /*
+    t_node *min;
+    min = minLocalisation(mytree.root, min, map);
+    printf("%d",min->value);*/
 
 
+    /*
     int min_cost = INT_MAX;
     t_node* min_path = NULL;
     int path_length = 0;
@@ -62,7 +73,7 @@ int main() {
     t_move current_moves[10];  // Array to track moves at each step
     findMinCostPath(root, 0, &min_cost, &min_path, point, current_path, current_moves, 0);
     printf("Smallest cost: %d\n", min_cost);
-    printPath(current_moves, path_length);
+    printPath(current_moves, path_length);*/
     return 0;
 
 }
