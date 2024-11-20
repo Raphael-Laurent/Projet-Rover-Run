@@ -58,16 +58,8 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
      */
     if (node->depth < size) { // l'arbre est de taille 5 (5 mouvements par phase)
         int i;
-        printf("\n");
         for (i = 0; i < node->ndSons; i++) {
-
-            //static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn"};
-            // nouvelle position utilisant le mouvement avails[i]
-            t_localisation new_loc;
-            new_loc = move(loc, node->avails[i]);
-//             printLocalisation(node->local, map);
-//             printLocalisation(new_loc, map);
-
+            t_localisation new_loc = move(loc, node->avails[i]);
             int new_val;
             if (new_loc.pos.x > 0 && new_loc.pos.x < map.x_max && new_loc.pos.y > 0 && new_loc.pos.y < map.y_max) {
                 new_val = map.costs[new_loc.pos.x][new_loc.pos.y];
@@ -94,7 +86,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
                     node->sons[i] = new_son;
 
                     // et on appelle récursivement la fonction pour créer les fils des fils
-                    createNTree(new_son, size - 1, new_loc, map);
+                    createNTree(new_son, size, new_loc, map);
 
                     free(new_avails);
                 }
