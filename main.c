@@ -4,6 +4,11 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
+
+t_tree getTree(t_map *map);
+
+void printMapAndCost(t_map *map);
+
 int main() {
     t_map map;
 
@@ -17,50 +22,11 @@ int main() {
 #endif
     srand(time(NULL));
 
-    printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
-    for (int i = 0; i < map.y_max; i++)
-    {
-        for (int j = 0; j < map.x_max; j++)
-        {
-            printf("%d ", map.soils[i][j]);
-        }
-        printf("\n");
-    }
-    // printf the costs, aligned left 5 digits
-    for (int i = 0; i < map.y_max; i++)
-    {
-        for (int j = 0; j < map.x_max; j++)
-        {
-            printf("%-5d ", map.costs[i][j]);
-        }
-        printf("\n");
-    }
-    displayMap(map);
+    printMapAndCost(&map);
 
 
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
-
-    t_localisation rover;
-    printf("%d", map.costs[2][2]);
-    t_localisation new_loc, old_loc;
-    old_loc.pos.x = 2;
-    old_loc.pos.y = 2;
-    old_loc.ori = NORTH;
-    new_loc = move(old_loc, F_10);
-    printf("%d",map.costs[new_loc.pos.y][new_loc.pos.x]);
-    rover = loc_init(2,2, NORTH); //on initialise la position du rover
-    t_move avails[7] = {F_10, F_20,B_10,F_30, U_TURN, T_RIGHT};
-    t_node *root = createNode(0, 6, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 5, rover, map);
-
-    // Affichage de l'arbre
-    printf("Arbre n-aire:\n");
-    printNTree(mytree);
-    t_node *min = minLocalisation(mytree.root, min, map);
-    printf("%d",min->value);
-
-
     t_move tableau[9];
     int proba[7];
     proba[F_10] = 22;
@@ -70,6 +36,7 @@ int main() {
     proba[T_LEFT] = 21;
     proba[T_RIGHT] = 21;
     proba[U_TURN] = 7;
+
     for (int i = 0; i < 7; i++) {
         printf("%d ", proba[i]);
     }
@@ -83,5 +50,19 @@ int main() {
         printf("%d ", proba[i]);
     }
     printf("\n");
+
+    t_tree mytree = getTree(&map);
+
+    // Affichage de l'arbre
+    printf("\nArbre n-aire:\n");
+    printNTree(mytree);
+
+    //Afficher le minimum de parcours
+    //t_node *min = minLocalisation(mytree.root, min, map);
+    //printf("%d\n",min->value);
+
     return 0;
 }
+
+
+

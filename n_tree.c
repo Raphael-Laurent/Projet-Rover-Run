@@ -91,7 +91,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
                 node->sons[i] = new_son;
 
                 // et on appelle récursivement la fonction pour créer les fils des fils
-                createNTree(new_son, size - 1, new_loc, map);
+                createNTree(new_son, size-1, new_loc, map);
 
                 free(new_avails);
             }

@@ -15,4 +15,6 @@ add_executable(main main.c
         stack.c
         stack.h
         n_tree.c
-        n_tree.h)
+        n_tree.h
+        initialize.c
+        initialize.h)
