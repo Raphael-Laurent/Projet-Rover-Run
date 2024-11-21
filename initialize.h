@@ -15,4 +15,6 @@ void printMapAndCost(t_map *map);
 
 t_tree getTree(t_map *map);
 
+void moveProbaInit(int proba[]);
+
 #endif //ROVER_RUN_INITIALIZE_H

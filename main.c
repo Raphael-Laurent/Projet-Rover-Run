@@ -4,10 +4,9 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
+#include "initialize.h"
 
-t_tree getTree(t_map *map);
-
-void printMapAndCost(t_map *map);
+void printTab(const int *proba, int size);
 
 int main() {
     t_map map;
@@ -24,32 +23,15 @@ int main() {
 
     printMapAndCost(&map);
 
-
     // -----TEST------------------------------------------------------------------
-    //map.costs = les coûts
     t_move tableau[9];
     int proba[7];
-    proba[F_10] = 22;
-    proba[F_20] = 15;
-    proba[F_30] = 7;
-    proba[B_10] = 7;
-    proba[T_LEFT] = 21;
-    proba[T_RIGHT] = 21;
-    proba[U_TURN] = 7;
+    moveProbaInit(proba);
 
-    for (int i = 0; i < 7; i++) {
-        printf("%d ", proba[i]);
-    }
-    printf("\n");
+    printTab(proba, 7); //Afficher les probabilités pour le debug
     randomMoves(proba, tableau);
-    for (int i = 0; i < 9; i++) {
-        printf("%s, ", _moves[tableau[i]]);
-    }
-    printf("\n");
-    for (int i = 0; i < 7; i++) {
-        printf("%d ", proba[i]);
-    }
-    printf("\n");
+    printRndMvs(tableau); //Afficher les moves pour le debug
+    printTab(proba, 7); //Afficher les probabilités pour le debug
 
     t_tree mytree = getTree(&map);
 
@@ -62,3 +44,11 @@ int main() {
     //printf("%d\n",min->value);
     return 0;
 }
+
+void printTab(const int *tableau, int size) {
+    for (int i = 0; i < size-1; i++) {
+        printf("%d ", tableau[i]);
+    }
+    printf("%d \n", tableau[size-1]);
+}
+
