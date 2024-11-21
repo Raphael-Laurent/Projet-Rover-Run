@@ -181,3 +181,13 @@ void randomMoves(int probs[], t_move array[]) {
     }
 }
 
+void moveProbaInit(int proba[]) {
+    proba[F_10] = 22;
+    proba[F_20] = 15;
+    proba[F_30] = 7;
+    proba[B_10] = 7;
+    proba[T_LEFT] = 21;
+    proba[T_RIGHT] = 21;
+    proba[U_TURN] = 7;
+}
+
