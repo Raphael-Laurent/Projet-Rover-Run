@@ -4,7 +4,8 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
-/*int main() {
+/*
+int main() {
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
@@ -70,6 +71,12 @@
     min = minLocalisation(mytree.root, min, map);
     printf("%d",min->value);
 
+
+    /*
+
+    /*
+
+    /*
     int min_cost = INT_MAX;
     t_node* min_path = NULL;
     int path_length = 0;
