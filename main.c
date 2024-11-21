@@ -70,8 +70,6 @@
     min = minLocalisation(mytree.root, min, map);
     printf("%d",min->value);
 
-
-    /*
     int min_cost = INT_MAX;
     t_node* min_path = NULL;
     int path_length = 0;
@@ -80,7 +78,7 @@
     t_move current_moves[10];  // Array to track moves at each step
     findMinCostPath(root, 0, &min_cost, &min_path, point, current_path, current_moves, 0);
     printf("Smallest cost: %d\n", min_cost);
-    printPath(current_moves, path_length);*/
+    printPath(current_moves, path_length);
     return 0;
 
 }
