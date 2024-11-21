@@ -40,7 +40,7 @@ t_orientation rotate(t_orientation ori, t_move move)
             rst=2;
             break;
         default:
-            rst = 0; // rst restait non initialisé en default dans le code de base, 0 choisi  arbitrairement sinon ça plante pour moi // Yiannis
+            rst = 0; // rst restait non initialisï¿½ en default dans le code de base, 0 choisi  arbitrairement sinon ï¿½a plante pour moi // Yiannis
             break;
     }
     return (ori+rst)%4;
@@ -141,7 +141,8 @@ char *getMoveAsString(t_move move)
     return _moves[move];
 }
 
-t_localisation move(t_localisation loc, t_move move) {
+t_localisation move(t_localisation loc, t_move move)
+{
     loc.ori = rotate(loc.ori, move);
     loc = translate(loc, move);
     return loc;
