@@ -52,8 +52,8 @@ t_localisation move(t_localisation, t_move);
 void updateLocalisation(t_localisation *, t_move);
 
 /*
-* Random movements
-*/
+ * Random movements
+ */
     
 #include <stdlib.h>
 #include <time.h>
