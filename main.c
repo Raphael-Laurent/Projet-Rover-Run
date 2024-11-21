@@ -62,6 +62,3 @@ int main() {
     //printf("%d\n",min->value);
     return 0;
 }
-
-
-
