@@ -60,7 +60,6 @@ int main() {
     //Afficher le minimum de parcours
     //t_node *min = minLocalisation(mytree.root, min, map);
     //printf("%d\n",min->value);
-
     return 0;
 }
 
