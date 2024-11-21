@@ -4,7 +4,7 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
-int main() {
+/*int main() {
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
@@ -62,4 +62,30 @@ int main() {
     printPath(current_moves, path_length);
     return 0;
 
+}
+*/
+int main() {
+    t_move tableau[9];
+    int proba[7];
+    proba[F_10] = 22;
+    proba[F_20] = 15;
+    proba[F_30] = 7;
+    proba[B_10] = 7;
+    proba[T_LEFT] = 21;
+    proba[T_RIGHT] = 21;
+    proba[U_TURN] = 7;
+    for (int i = 0; i < 7; i++) {
+        printf("%d ", proba[i]);
+    }
+    printf("\n");
+    randomMoves(proba, tableau);
+    for (int i = 0; i < 9; i++) {
+        printf("%s, ", _moves[tableau[i]]);
+    }
+    printf("\n");
+    for (int i = 0; i < 7; i++) {
+        printf("%d ", proba[i]);
+    }
+    printf("\n");
+    return 0;
 }

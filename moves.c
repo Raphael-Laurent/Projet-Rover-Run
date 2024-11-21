@@ -153,44 +153,30 @@ void updateLocalisation(t_localisation *p_loc, t_move m)
     return;
 }
 
-void randomMoves(int* probs, t_move* array) {
+void randomMoves(int probs[], t_move array[]) {
     const int numVal = 9;
     int randVal;
-    const int totalCoef = probs[F_10] + probs[F_20] + probs[F_30] + probs[B_10] + probs[T_LEFT] + probs[T_RIGHT] + probs[U_TURN] - 1;
-
+    int totalCoef = probs[F_10] + probs[F_20] + probs[F_30] + probs[B_10] + probs[T_LEFT] + probs[T_RIGHT] + probs[U_TURN] - 1;
+    int noResult;
+    int interval;
 
     srand(time(NULL));
     for (int i = 0; i <= numVal; i++) {
         randVal = (rand()%(totalCoef))+1;
-        if (randVal <= probs[F_10]) {
-            array[i] = F_10;
-            probs[F_10]--;
-        } else if (randVal <= probs[F_20]) {
-            array[i] = F_20;
-            probs[F_20]--;
+        noResult = 1;
+        interval = 0;
+        for (t_move e = 0; e < NONE && noResult; e++) {
+            interval += probs[e];
+            if (randVal <= interval) {
+                array[i] = e;
+                probs[e]--;
+                totalCoef--;
+                noResult = 0;
+            }
         }
-        else if (randVal <= probs[F_30]) {
-            array[i] = F_30;
-            probs[F_30]--;
-        }
-        else if (randVal <= probs[B_10]) {
-            array[i] = B_10;
-            probs[B_10]--;
-        }
-        else if (randVal <= probs[T_LEFT]) {
-            array[i] = T_LEFT;
-            probs[T_LEFT]--;
-        }
-        else if (randVal <= probs[T_RIGHT]) {
-            array[i] = T_RIGHT;
-            probs[T_RIGHT]--;
-        }
-        else if (randVal <= probs[U_TURN]) {
-            array[i] = U_TURN;
-            probs[U_TURN]--;
-        }
-        else {
+        if(noResult) {
             array[i] = NONE;
         }
     }
 }
+
