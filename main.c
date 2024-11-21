@@ -99,10 +99,7 @@ int main() {
     }
     printf("\n");
     randomMoves(proba, tableau);
-    for (int i = 0; i < 9; i++) {
-        printf("%s, ", _moves[tableau[i]]);
-    }
-    printf("\n");
+    printRndMvs(tableau);
     for (int i = 0; i < 7; i++) {
         printf("%d ", proba[i]);
     }

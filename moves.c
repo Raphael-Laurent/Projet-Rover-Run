@@ -181,6 +181,8 @@ void randomMoves(int probs[], t_move array[]) {
     }
 }
 
+const int NB_RAND_MOVES = 9;
+
 void moveProbaInit(int proba[]) {
     proba[F_10] = 22;
     proba[F_20] = 15;
@@ -189,5 +191,12 @@ void moveProbaInit(int proba[]) {
     proba[T_LEFT] = 21;
     proba[T_RIGHT] = 21;
     proba[U_TURN] = 7;
+}
+
+void printRndMvs(t_move array[]) {
+    for (int i = 0; i < NB_RAND_MOVES; i++) {
+        printf("%s, ", _moves[array[i]]);
+    }
+    printf("\n");
 }
 
