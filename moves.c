@@ -162,7 +162,7 @@ void randomMoves(int probs[], t_move array[]) {
     int interval;
 
     srand(time(NULL));
-    for (int i = 0; i <= numVal; i++) {
+    for (int i = 0; i < numVal; i++) {
         randVal = (rand()%(totalCoef))+1;
         noResult = 1;
         interval = 0;
