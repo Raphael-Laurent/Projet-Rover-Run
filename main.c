@@ -50,9 +50,7 @@ int main() {
     new_loc = move(old_loc, F_10);
     printf("%d",map.costs[new_loc.pos.y][new_loc.pos.x]);
     rover = loc_init(2,2, NORTH); //on initialise la position du rover
-    int baseProbabilites[7] = {2,3};
-    enum e_move tab[20];
-    t_move avails[7] = randomMoves(baseProbabilites,tab);
+    t_move avails[7] = {F_10, F_20,B_10,F_30, U_TURN, T_RIGHT};
     t_node *root = createNode(0, 6, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, 5, rover, map);
 
@@ -61,6 +59,29 @@ int main() {
     printNTree(mytree);
     t_node *min = minLocalisation(mytree.root, min, map);
     printf("%d",min->value);
-    return 0;
 
+
+    t_move tableau[9];
+    int proba[7];
+    proba[F_10] = 22;
+    proba[F_20] = 15;
+    proba[F_30] = 7;
+    proba[B_10] = 7;
+    proba[T_LEFT] = 21;
+    proba[T_RIGHT] = 21;
+    proba[U_TURN] = 7;
+    for (int i = 0; i < 7; i++) {
+        printf("%d ", proba[i]);
+    }
+    printf("\n");
+    randomMoves(proba, tableau);
+    for (int i = 0; i < 9; i++) {
+        printf("%s, ", _moves[tableau[i]]);
+    }
+    printf("\n");
+    for (int i = 0; i < 7; i++) {
+        printf("%d ", proba[i]);
+    }
+    printf("\n");
+    return 0;
 }
