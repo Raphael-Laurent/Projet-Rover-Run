@@ -50,7 +50,9 @@ int main() {
     new_loc = move(old_loc, F_10);
     printf("%d",map.costs[new_loc.pos.y][new_loc.pos.x]);
     rover = loc_init(2,2, NORTH); //on initialise la position du rover
-    t_move avails[7] = {F_10, F_20,B_10,F_30, U_TURN, T_RIGHT};
+    int baseProbabilites[7] = {2,3};
+    enum e_move tab[20];
+    t_move avails[7] = randomMoves(baseProbabilites,tab);
     t_node *root = createNode(0, 6, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, 5, rover, map);
 
