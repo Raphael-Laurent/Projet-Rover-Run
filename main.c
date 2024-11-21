@@ -6,7 +6,7 @@
 #include "time.h"
 #include "initialize.h"
 
-void printTab(const int *proba, int size);
+void printTab(const int *tableau, int size);
 
 int main() {
     t_map map;
@@ -22,7 +22,6 @@ int main() {
     srand(time(NULL));
 
     printMapAndCost(&map);
-
     // -----TEST------------------------------------------------------------------
     t_move tableau[9];
     int proba[7];

@@ -72,9 +72,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
         int i;
         printf("\n");
         for (i = 0; i < node->ndSons; i++) {
-            t_localisation new_loc;
-            new_loc = move(loc, node->avails[i]);
-
+            t_localisation new_loc = move(loc, node->avails[i]);
             int new_val;
             if (isValidLocalisation(new_loc.pos, 6, 7)) {
                 new_val = map.costs[new_loc.pos.y][new_loc.pos.x];
@@ -166,9 +164,8 @@ void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
 
-    t_localisation current_loc, min_loc;
-    current_loc = current_node->local;
-    min_loc = min_node->local;
+    t_localisation current_loc = current_node->local;
+    t_localisation min_loc = min_node->local;
     if(!isValidLocalisation(current_node->local.pos,6,7)){
         return min_node;
     }else if(current_node->ndSons == 0){
