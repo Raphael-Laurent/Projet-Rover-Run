@@ -60,4 +60,6 @@ void updateLocalisation(t_localisation *, t_move);
 
 void randomMoves(int probs[], t_move array[]);
 
+void moveProbaInit(int proba[]);
+
 #endif //UNTITLED1_MOVES_H
