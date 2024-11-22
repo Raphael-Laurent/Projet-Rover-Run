@@ -181,7 +181,6 @@ void randomMoves(int probs[], t_move array[]) {
     }
 }
 
-const int NB_RAND_MOVES = 9;
 
 void moveProbaInit(int proba[]) {
     proba[F_10] = 22;
