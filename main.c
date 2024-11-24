@@ -27,11 +27,12 @@ int main() {
     int proba[7];
     moveProbaInit(proba);
 
+    /*
     printTab(proba, 7); //Afficher les probabilités pour le debug
     randomMoves(proba, tableau);
     printRndMvs(tableau); //Afficher les moves pour le debug
     printTab(proba, 7); //Afficher les probabilités pour le debug
-
+    */
     t_tree mytree = getTree(&map);
 
     // Affichage de l'arbre
@@ -46,7 +47,7 @@ int main() {
     clock_t start = chronometerInit();
     /*
      * exemple
-     */
+
     for (int i = 0; i < 0xFFff; i++) {
         for (int j = 0; j < 0xFFff; j++) {
             for (int k = 0; k < 0xffff; k++) {
@@ -56,6 +57,7 @@ int main() {
     }
     //
     double deltaT = chronometerEnd(start);
+    */
     return 0;
 }
 

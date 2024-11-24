@@ -140,46 +140,27 @@ void parcoursNTree(t_tree tree) {
     }
 }
 
-void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min_path, int *path_length,
-                     t_node **current_path, t_move *current_moves, int depth) {
-    if (node == NULL) { return; }
-
-    current_cost += node->value;
-    current_path[depth] = node;
-
-    if (node->ndSons == 0) {
-        if (current_cost < *min_cost) {
-            *min_cost = current_cost;
-            *min_path = node;
-            *path_length = depth + 1;
-        }
-    }
-
-    for (int i = 0; i < node->ndSons; i++) {
-        current_moves[depth] = node->avails[i];  // Record move leading to child
-        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, current_moves,
-                        depth + 1);
-    }
-}
-
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
-
-    t_localisation current_loc = current_node->local;
-    t_localisation min_loc = min_node->local;
-    if(!isValidLocalisation(current_node->local.pos,6,7)){
-        return min_node;
-    }else if(current_node->ndSons == 0){
-        if(map.costs[current_loc.pos.x][current_loc.pos.y] < map.costs[min_loc.pos.x][min_loc.pos.y]){
+    t_position current_pos, min_pos;
+    current_pos = current_node->local.pos;
+    min_pos = min_node->local.pos;
+    printf("verif : %d %d\n", isValidLocalisation(current_pos, map.x_max, map.y_max), current_node->ndSons == 0);
+    if(isValidLocalisation(current_pos, map.x_max, map.y_max) && current_node->ndSons == 0){
+        if (map.costs[current_pos.y][current_pos.x] < map.costs[min_pos.y][min_pos.y]){
             min_node = current_node;
+            printf("SUCCESS");
         }
     } else {
-        for (int i = 0; i < current_node->ndSons; i++) {
-            min_node = minLocalisation(current_node->sons[i], min_node, map);
+        for (int i = 0; i < current_node->ndSons; i++){
+            if(current_node->sons[i] != NULL){
+                printf("yea");
+                min_node = minLocalisation(current_node->sons[i], min_node, map);
+            }
         }
     }
+    printf("|| pos : %d %d ",min_node->value, min_node->local.pos.x);
     return min_node;
 }
-
 
 void printPath(t_move *moves, int path_length) {
     if (path_length == 0) {
@@ -193,7 +174,6 @@ void printPath(t_move *moves, int path_length) {
     }
     printf("End\n");
 }
-
 
 void deleteTree(t_tree *tree) {
     if (tree == NULL || tree->root == NULL) {

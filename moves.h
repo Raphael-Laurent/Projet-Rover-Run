@@ -4,7 +4,8 @@
 
 #ifndef UNTITLED1_MOVES_H
 #define UNTITLED1_MOVES_H
-
+#include <stdlib.h>
+#include <time.h>
 #include "loc.h"
 
 /**
@@ -55,8 +56,7 @@ void updateLocalisation(t_localisation *, t_move);
  * Random movements
  */
     
-#include <stdlib.h>
-#include <time.h>
+
 
 #define NB_RAND_MOVES 9
 
