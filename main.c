@@ -60,7 +60,7 @@ int main() {
     printNTree(mytree);
 
 
-    t_node *min = NULL;
+    t_node *min;
     min = minLocalisation(mytree.root, min, map);
     printf("agggggggg %d %d %d %d",min->value, min->local.pos.y, min->local.pos.x, min->ndSons);
 
