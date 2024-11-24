@@ -4,7 +4,7 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
-/*int main() {
+int main() {
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
@@ -49,17 +49,11 @@
     //map.costs = les coûts
 
     t_localisation rover;
-    printf("%d", map.costs[2][2]);
-    t_localisation new_loc, old_loc;
-    old_loc.pos.x = 2;
-    old_loc.pos.y = 2;
-    old_loc.ori = NORTH;
-    new_loc = move(old_loc, F_10);
-    printf("%d",map.costs[new_loc.pos.y][new_loc.pos.x]);
-    rover = loc_init(2,2, NORTH); //on initialise la position du rover
+    printf("cost : %d", map.costs[4][3]);
+    rover = loc_init(4,3, NORTH); //on initialise la position du rover
     t_move avails[7] = {F_10, F_20,B_10,F_30, U_TURN, T_RIGHT};
-    t_node *root = createNode(0, 6, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 5, rover, map);
+    t_node *root = createNode(0, 5, avails, 0, rover, NONE);
+    t_tree mytree = createNTree(root, 3, rover, map);
 
     // Affichage de l'arbre
     printf("Arbre n-aire:\n");
@@ -67,8 +61,16 @@
 
 
     t_node *min;
+    for(int y = 0; y < map.y_max; y++){
+        for(int x = 0; x < map.x_max; x++){
+            if(map.costs[y][x] >= 1000){
+                min->local = loc_init(x,y,NORTH);
+                continue;
+            }
+        }
+    }
     min = minLocalisation(mytree.root, min, map);
-    printf("%d",min->value);
+    printf("agggggggg %d",min->local.pos.x);
 
 
     /*
@@ -81,11 +83,9 @@
     findMinCostPath(root, 0, &min_cost, &min_path, point, current_path, current_moves, 0);
     printf("Smallest cost: %d\n", min_cost);
     printPath(current_moves, path_length);*/
-    return 0;
 
-}
-*/
-int main() {
+
+/*
     t_move tableau[9];
     int proba[7];
     proba[F_10] = 22;
@@ -107,6 +107,6 @@ int main() {
     for (int i = 0; i < 7; i++) {
         printf("%d ", proba[i]);
     }
-    printf("\n");
+    printf("\n");*/
     return 0;
 }
