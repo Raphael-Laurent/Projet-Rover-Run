@@ -24,12 +24,11 @@ void printMapAndCost(t_map *map) {
 }
 
 t_tree getTree(t_map *map) {
-    t_localisation rover;
+    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
     t_move avails[NB_RAND_MOVES];
     int move_proba[NONE];
     moveProbaInit(move_proba);
     randomMoves(move_proba, avails);
-    rover = loc_init(4,3, NORTH); //on initialise la position du rover
     t_node *root = createNode(0, 5, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, 3, rover, (*map));
     return mytree;

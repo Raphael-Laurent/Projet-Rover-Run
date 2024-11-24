@@ -68,7 +68,6 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
     */
     if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 && map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size){// l'arbre est de taille 5 (5 mouvements par phase)
         int i;
-        printf("\n");
         for (i = 0; i < node->ndSons; i++) {
 
             // nouvelle position utilisant le mouvement avails[i]
