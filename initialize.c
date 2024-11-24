@@ -46,3 +46,13 @@ t_tree getTree(t_map *map) {
     t_tree mytree = createNTree(root, 5, rover, (*map));
     return mytree;
 }
+
+clock_t chronometerInit() {
+    return clock();
+}
+
+double chronometerEnd(clock_t start) {
+    clock_t end = clock();
+    double dt = ((double)(end - start)) / ((double)CLOCKS_PER_SEC);
+    return dt;
+}

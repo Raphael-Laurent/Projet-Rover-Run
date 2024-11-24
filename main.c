@@ -4,6 +4,7 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
+#include "initialize.h"
 
 t_tree getTree(t_map *map);
 
@@ -57,5 +58,20 @@ int main() {
     //Afficher le minimum de parcours
     //t_node *min = minLocalisation(mytree.root, min, map);
     //printf("%d\n",min->value);
+    
+    //utilisation du chronomètre
+    clock_t start = chronometerInit();
+    /*
+     * exemple
+     */
+    for (int i = 0; i < 0xFFff; i++) {
+        for (int j = 0; j < 0xFFff; j++) {
+            for (int k = 0; k < 0xffff; k++) {
+                printf("%6.3lf secondes\r", ((double)(clock() - start)) / ((double)CLOCKS_PER_SEC));
+            }
+        }
+    }
+    //
+    double deltaT = chronometerEnd(start);
     return 0;
 }
