@@ -58,7 +58,7 @@ void updateLocalisation(t_localisation *, t_move);
 #include <stdlib.h>
 #include <time.h>
 
-const int NB_RAND_MOVES;
+#define NB_RAND_MOVES 9
 
 void randomMoves(int probs[], t_move array[]);
 
@@ -66,4 +66,4 @@ void printRndMvs(t_move array[]);
 
 void printRndMvs(t_move array[]);
 
-#endif //UNTITLED1_MOVES_H
+#endif //UNTITLED1_MOVES_Hdad
