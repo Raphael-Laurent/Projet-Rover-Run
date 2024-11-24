@@ -62,12 +62,6 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
     */
     if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 && map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size){
         int i;
-        printf("\n");
-        if(node->move == F_20 && node->value == 5 && node->parent->value == 0) {
-            for (int i = 0; i < node->ndSons; i++) {
-                printf("%s %d] ", getMoveAsString(node->avails[i]), node->value);
-            }
-        }
         for (i = 0; i < node->ndSons; i++) {
 
             // nouvelle position utilisant le mouvement avails[i]
@@ -76,6 +70,9 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
 
             int new_val;
             if (isValidLocalisation(new_loc.pos, 6, 7)) {
+                if(node->move == F_10 && node->value == 5 && node->parent->value == 0) {
+                    printf("%s",getMoveAsString(node->avails[i]));
+                }
                 new_val = map.costs[new_loc.pos.y][new_loc.pos.x];
 
                 t_move *new_avails;
@@ -90,7 +87,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
                 node->sons[i] = new_son;
 
                 // et on appelle récursivement la fonction pour créer les fils des fils
-                createNTree(new_son, size - 1, new_loc, map);
+                createNTree(new_son, size, new_loc, map);
 
                 free(new_avails);
             }
@@ -114,7 +111,7 @@ void printNTree(t_tree tree, t_map map) {
     printf("loc : %d/%d//%s ; cost : %d ; value : %d ; direction : %s ", tree.root->local.pos.x, tree.root->local.pos.y,
            getOriAsString(tree.root->local.ori), map.costs[tree.root->local.pos.y][tree.root->local.pos.x], tree.root->value, getMoveAsString(tree.root->move));
     if (tree.root->parent != NULL) {
-        printf("; value of the parent : %d", tree.root->parent->value);
+        printf("; value of the parent : %d ; depth : %d", tree.root->parent->value, tree.root->depth);
     }
     printf("\n");
     // Afficher récursivement chaque enfant avec une profondeur augmentée
@@ -165,10 +162,10 @@ void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
     if(current_node->ndSons == 0) {
-        if (min_node == NULL) {
+        //printf("%d %d     \n",map.costs[current_node->local.pos.y][current_node->local.pos.x],map.costs[current_node->local.pos.y][current_node->local.pos.x]==0);
+        if (min_node == NULL || map.costs[current_node->local.pos.y][current_node->local.pos.x] == 0) {
             min_node = current_node;
-        } else if(map.costs[current_node->local.pos.y][current_node->local.pos.x] == 0){
-            min_node = current_node;
+        } else if(map.costs[min_node->local.pos.y][min_node->local.pos.x] == 0){
             return min_node;
         } else if (current_node->value < min_node->value) {
             min_node = current_node;
@@ -186,11 +183,12 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
 void path(t_localisation rover, t_map map, t_move *avails){
     // partir d'une localisation pour générer un arbre n-aire, choisir le chemin le plus court et afficher le mouvement
     t_node *root = createNode(0, 7, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 3, rover, map);
-    printNTree(mytree, map);
+    t_tree mytree = createNTree(root, 5, rover, map);
+    //printNTree(mytree, map);
     t_node *min = NULL;
     min = minLocalisation(mytree.root, min, map);
     printPath(min, map);
+    printPathSimple(min,map);
 
     //displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
 }
@@ -200,15 +198,22 @@ void printPath(t_node *feuille, t_map map) {
         printPath(feuille->parent, map);
     }
     printf("%s -->", getMoveAsString(feuille->move));
-    /*if(feuille->move == NONE){
+    if(feuille->move == NONE){
         printf("Initialisation du rover :\n");
     } else if(map.costs[feuille->local.pos.y][feuille->local.pos.x] == 0){
-        printf("Vous avez atteint la base !");
+        printf("Vous avez atteint la base !\n");
     } else {
         printf("The robot does the movement : %s \n", getMoveAsString(feuille->move));
     }
     displayNewRoverLocation(map,feuille->local.pos.x, feuille->local.pos.y);
-    printf("\n");*/
+    printf("\n");
+}
+
+void printPathSimple(t_node *feuille, t_map map) {
+    if(feuille->parent != NULL){
+        printPathSimple(feuille->parent, map);
+    }
+    printf("%s -->", getMoveAsString(feuille->move));
 }
 
 

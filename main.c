@@ -35,7 +35,6 @@ int main() {
         }
         printf("\n");
     }
-    displayMap(map);
 
 
 
@@ -49,12 +48,11 @@ int main() {
     //map.costs = les coûts
 
     t_localisation rover;
-    printf("cost : %d\n", map.costs[4][3]);
     rover = loc_init(4,3, NORTH); //on initialise la position du rover
     t_move avails[7] = {F_10, F_20,F_20, B_10,F_30, U_TURN, T_RIGHT};
 
     displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
-
+    printf("\n\n");
 
     path(rover, map, avails);
 

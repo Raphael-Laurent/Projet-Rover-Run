@@ -317,6 +317,6 @@ void displayNewRoverLocation(t_map map, int x, int y){
     temp = map.soils[y][x];
     map.soils[y][x] = ROVER;
     displayMap(map);
-    printf("---------------------------------------------------");
+    printf("---------------------------------------------------\n");
     map.soils[y][x] = temp;
 }

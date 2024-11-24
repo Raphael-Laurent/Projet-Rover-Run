@@ -47,6 +47,9 @@ void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min
 
 void printPath(t_node*, t_map);
 
+void printPathSimple(t_node *feuille, t_map map);
+
+
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
 
 void path(t_localisation, t_map, t_move*);
