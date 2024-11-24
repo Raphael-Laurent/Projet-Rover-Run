@@ -176,24 +176,19 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
 
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
-    t_position current_pos, min_pos;
-    current_pos = current_node->local.pos;
-    min_pos = min_node->local.pos;
-    printf("verif : %d %d\n", isValidLocalisation(current_pos, map.x_max, map.y_max), current_node->ndSons == 0);
-    if(isValidLocalisation(current_pos, map.x_max, map.y_max) && current_node->ndSons == 0){
-        if (map.costs[current_pos.y][current_pos.x] < map.costs[min_pos.y][min_pos.y]){
+    if(current_node->ndSons == 0) {
+        if (min_node == NULL) {
             min_node = current_node;
-            printf("SUCCESS");
+        } else if (current_node->value < min_node->value) {
+            min_node = current_node;
         }
     } else {
-        for (int i = 0; i < current_node->ndSons; i++){
-            if(current_node->sons[i] != NULL){
-                printf("yea");
+        for (int i = 0; i < current_node->ndSons; i++) {
+            if (current_node->sons[i] != NULL) {
                 min_node = minLocalisation(current_node->sons[i], min_node, map);
             }
         }
     }
-    printf("|| pos : %d %d ",min_node->value, min_node->local.pos.x);
     return min_node;
 }
 

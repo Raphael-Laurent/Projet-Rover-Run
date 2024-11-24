@@ -60,17 +60,9 @@ int main() {
     printNTree(mytree);
 
 
-    t_node *min;
-    for(int y = 0; y < map.y_max; y++){
-        for(int x = 0; x < map.x_max; x++){
-            if(map.costs[y][x] >= 1000){
-                min->local = loc_init(x,y,NORTH);
-                continue;
-            }
-        }
-    }
+    t_node *min = NULL;
     min = minLocalisation(mytree.root, min, map);
-    printf("agggggggg %d",min->local.pos.x);
+    printf("agggggggg %d %d %d %d",min->value, min->local.pos.y, min->local.pos.x, min->ndSons);
 
 
     /*
