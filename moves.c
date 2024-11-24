@@ -188,4 +188,3 @@ void printRndMvs(t_move array[]) {
     }
     printf("%s \n", _moves[array[NB_RAND_MOVES- 1]]);
 }
-
