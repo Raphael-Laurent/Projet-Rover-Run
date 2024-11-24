@@ -65,14 +65,15 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
      * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
      * @param node : noeud
      * @param size : taille de l'arbre
-     * @param map : map des coûts
-     */
-    if ((node->value < 1000 && node->value != 0) &&
-        node->depth < size) {// l'arbre est de taille 5 (5 mouvements par phase)
+    */
+    if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 && map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size){// l'arbre est de taille 5 (5 mouvements par phase)
         int i;
-        printf("\n");
         for (i = 0; i < node->ndSons; i++) {
-            t_localisation new_loc = move(loc, node->avails[i]);
+
+            // nouvelle position utilisant le mouvement avails[i]
+            t_localisation new_loc;
+            new_loc = move(loc, node->avails[i]);
+
             int new_val;
             if (isValidLocalisation(new_loc.pos, 6, 7)) {
                 new_val = map.costs[new_loc.pos.y][new_loc.pos.x];
@@ -89,7 +90,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
                 node->sons[i] = new_son;
 
                 // et on appelle récursivement la fonction pour créer les fils des fils
-                createNTree(new_son, size-1, new_loc, map);
+                createNTree(new_son, size - 1, new_loc, map);
 
                 free(new_avails);
             }
@@ -101,6 +102,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
         node->ndSons = 0;
     }
 }
+
 
 
 void printNTree(t_tree tree) {
@@ -123,6 +125,7 @@ void printNTree(t_tree tree) {
         printNTree(new_tree);
     }
 }
+
 
 void parcoursNTree(t_tree tree) {
     t_node *temp;
