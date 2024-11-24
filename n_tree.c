@@ -31,6 +31,7 @@ t_move *removeFromList(t_move *list, t_move val, int len_list) {
     return new_list;
 }
 
+
 t_node *createNode(int val, int nd_sons, t_move *list_choix, int depth, t_localisation loc, t_move mov) {
     t_node *new_node;
     new_node = (t_node *) malloc(sizeof(t_node));
@@ -152,33 +153,15 @@ void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min
     }
 }
 
-/*
-t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
-    t_position current_pos, min_pos;
-    current_pos = current_node->local.pos;
-    current_pos = min_node->local.pos;
-    if(!isValidLocalisation(current_node->local.pos,map.x_max, map.y_max)){
-        return min_node;
-    }else if(current_node->ndSons == 0){
-        if(map.costs[current_pos.x][current_pos.y] < map.costs[min_pos.x][min_pos.y]){
-            min_node = current_node;
-        }
-    } else {
-        for (int i = 0; i < current_node->ndSons; i++){
-            if(current_node->sons[i] != NULL){
-                min_node = minLocalisation(current_node->sons[i], min_node, map);
-            }
-        }
-    }
-    return min_node;
-}*/
-
 
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
     if(current_node->ndSons == 0) {
         if (min_node == NULL) {
             min_node = current_node;
+        } else if(map.costs[current_node->local.pos.y][current_node->local.pos.x] == 0){
+            min_node = current_node;
+            return min_node;
         } else if (current_node->value < min_node->value) {
             min_node = current_node;
         }
@@ -216,6 +199,7 @@ void deleteTree(t_tree *tree) {
 
 void deleteNode(t_node *node) {
     if (node == NULL) { return; }
+    printf("AAAAAAAAAAAAh %d",node->ndSons);
     for (int i = 0; i < node->ndSons; i++) {
         deleteNode(node->sons[i]);
     }
