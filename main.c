@@ -42,7 +42,7 @@ int main() {
     //Afficher le minimum de parcours
     //t_node *min = minLocalisation(mytree.root, min, map);
     //printf("%d\n",min->value);
-    
+
     //utilisation du chronomètre
     clock_t start = chronometerInit();
     /*
