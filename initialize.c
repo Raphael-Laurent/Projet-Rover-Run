@@ -23,19 +23,14 @@ void printMapAndCost(t_map *map) {
     displayMap((*map));
 }
 
-
 t_tree getTree(t_map *map) {
-    t_localisation rover;
-    t_localisation new_loc, old_loc;
-    old_loc.pos.x = 2;
-    old_loc.pos.y = 2;
-    old_loc.ori = NORTH;
-    new_loc = move(old_loc, F_10);
-    printf("Cout actuel %d", (*map).costs[new_loc.pos.y][new_loc.pos.x]);
-    rover = loc_init(2, 2, NORTH); //on initialise la position du rover
-    t_move avails[9] = {F_10, F_20, B_10, F_30, U_TURN, T_RIGHT};
-    t_node *root = createNode(0, 7, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 7, rover, (*map));
+    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
+    t_move avails[NB_RAND_MOVES];
+    int move_proba[NONE];
+    moveProbaInit(move_proba);
+    randomMoves(move_proba, avails);
+    t_node *root = createNode(0, 5, avails, 0, rover, NONE);
+    t_tree mytree = createNTree(root, 3, rover, (*map));
     return mytree;
 }
 
@@ -47,4 +42,14 @@ void moveProbaInit(int proba[]) {
     proba[T_LEFT] = 21;
     proba[T_RIGHT] = 21;
     proba[U_TURN] = 7;
+}
+
+clock_t chronometerInit() {
+    return clock();
+}
+
+double chronometerEnd(clock_t start) {
+    clock_t end = clock();
+    double dt = ((double)(end - start)) / ((double)CLOCKS_PER_SEC);
+    return dt;
 }
