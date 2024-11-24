@@ -39,14 +39,16 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map); //cr√
 
 t_move *removeFromList(t_move*, t_move, int);
 
-void printNTree(t_tree tree);
+void printNTree(t_tree tree, t_map map);
 
 void parcoursNTree(t_tree tree); //parcours pr√©fixe d'un arbre n-aire
 
 void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, t_move* current_moves, int depth);
 
-void printPath(t_move* moves, int path_length);
+void printPath(t_node*, t_map);
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
+
+void path(t_localisation, t_map, t_move*);
 
 #endif //UNTITLED1_N_TREE_H

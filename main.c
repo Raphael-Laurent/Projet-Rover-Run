@@ -49,35 +49,15 @@ int main() {
     //map.costs = les coûts
 
     t_localisation rover;
-    printf("cost : %d", map.costs[4][3]);
+    printf("cost : %d\n", map.costs[4][3]);
     rover = loc_init(4,3, NORTH); //on initialise la position du rover
-    t_move avails[7] = {F_10, F_20,B_10,F_30, U_TURN, T_RIGHT};
-    t_node *root = createNode(0, 5, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 3, rover, map);
-
-    // Affichage de l'arbre
-    printf("Arbre n-aire:\n");
-    printNTree(mytree);
+    t_move avails[7] = {F_10, F_20,F_20, B_10,F_30, U_TURN, T_RIGHT};
 
     displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
 
 
-    t_node *min = NULL;
-    min = minLocalisation(mytree.root, min, map);
-    printf("agggggggg %d %d %d %d\n",min->value, min->local.pos.y, min->local.pos.x, min->ndSons);
+    path(rover, map, avails);
 
-    displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
-
-    root = createNode(0, 5, avails, 0, min->local, NONE);
-    mytree = createNTree(root, 3, min->local, map);
-    printf("Arbre n-aire Take 2 : \n");
-    printNTree(mytree);
-
-    min = NULL;
-    min = minLocalisation(mytree.root, min, map);
-    printf("agggggggg %d %d %d %d %d\n",min->value, min->local.pos.y, min->local.pos.x, min->ndSons, min->parent->value);
-
-    displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
 
 
 /*
