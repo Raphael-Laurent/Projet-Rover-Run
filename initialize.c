@@ -32,7 +32,7 @@ t_tree getTree(t_map *map) {
     old_loc.ori = NORTH;
     new_loc = move(old_loc, F_10);
     printf("Cout actuel %d", (*map).costs[new_loc.pos.y][new_loc.pos.x]);
-    rover = loc_init(2, 2, NORTH); //on initialise la position du rover
+    rover = loc_init(3, 2, NORTH); //on initialise la position du rover
     t_move avails[9] = {F_10, F_20, B_10, F_30, U_TURN, T_RIGHT};
     t_node *root = createNode(0, 7, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, 7, rover, (*map));
