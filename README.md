@@ -1,8 +1,8 @@
 # Rover-Run-!
 Projet TI301 - Efrei semestre 3 (P2)
 P2 2024-2025
-
-Projet en langage C
+---
+######Projet en langage C
 
 Dans le cas d'une mission sur Mars, nous devons aider un rover à atteindre sa base, avec une dépense de fuel minimum.
 Le coût d'un trajet est défini par le type de terrain que le rover traverse, et les mouvements qu'il peut effectuer sont décidés aléatoirement.
