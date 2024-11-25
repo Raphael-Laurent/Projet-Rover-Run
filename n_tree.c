@@ -56,7 +56,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
             t_localisation new_loc;
             new_loc = move(loc, node->avails[i]);
             int new_val;
-            if (isValidLocalisation(new_loc.pos, 6, 7)) {
+            if (isValidLocalisation(new_loc.pos, map.x_max, map.y_max)) {
                 if (node->move == F_10 && node->value == 5 && node->parent->value == 0) {
                     printf("%s", getMoveAsString(node->avails[i]));
                 }

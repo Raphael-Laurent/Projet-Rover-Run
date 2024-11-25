@@ -17,11 +17,7 @@ int main() {
 
     t_move avails[7] = {F_10, F_20,F_20, B_10,F_30, U_TURN, T_RIGHT};
 
-    printf("\n\n");
-
-
-
-
+    printf("\n");
 
     t_move tableau[9];
     int proba[7];
@@ -40,8 +36,8 @@ int main() {
     t_tree mytree = getTree(&map, rover, ROVER);
 
     // Affichage de l'arbre
-//    printf("\nArbre n-aire:\n");
-    //printNTree(mytree, map);
+    printf("\nArbre n-aire:\n");
+    printNTree(mytree, map);
 
     //Afficher le minimum de parcours
     //t_node *min = minLocalisation(mytree.root, min, map);

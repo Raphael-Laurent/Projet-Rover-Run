@@ -9,8 +9,8 @@ t_map getRandomMap() {
     t_map map;
     char *listOfMapsWindows[] = {"..\\maps\\example1.map","..\\maps\\example2.map"};
     char *listOfMapsNotWindows[] = {"../maps/example1.map","../maps/example2.map"};
-    int size = sizeof(listOfMapsWindows);
-    srand(time(NULL));    int mapNumber = rand() % size;
+    int sizeOfMap = sizeof(listOfMapsWindows)/sizeof(listOfMapsWindows[0]);
+    srand(time(NULL));    int mapNumber = rand() % sizeOfMap;
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile(listOfMapsWindows[mapNumber]);
 #else
@@ -27,6 +27,7 @@ void printMapAndCost(t_map *map) {
         }
         printf("\n");
     }
+    printf("\n");
     // printf the costs, aligned left 5 digits
     for (int i = 0; i < (*map).y_max; i++) {
         for (int j = 0; j < (*map).x_max; j++) {
@@ -34,6 +35,7 @@ void printMapAndCost(t_map *map) {
         }
         printf("\n");
     }
+    printf("\n");
     displayMap((*map));
 }
 
