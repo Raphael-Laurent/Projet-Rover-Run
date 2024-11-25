@@ -83,6 +83,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
             t_move move_id = node->avails[i];
             if(map.soils[node->local.pos.y][node->local.pos.x] == 2){
                 move_id = updateERGMovement(node->avails[i]);
+                node->avails[i] = move_id;
             }
             new_loc = move(loc, move_id);
 
