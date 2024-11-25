@@ -10,5 +10,4 @@ Le coût d'un trajet est défini par le type de terrain que le rover traverse, e
 Ainsi, nous avons dû créer un algorithme permettant au rover d'effectuer des "manches" où plusieurs chemins lui sont proposés selon les mouvements qui sont tirés au hasard.
 Notre algorithme permet donc au robot de choisir soit un chemin qui dépense le moins de fuel, soit de choisir un chemin qui le mène directement à la base.
 Pour pouvoir calculer tous les chemins possibles, nous avons implémenté une structure d'arbre n-aire.
-##test
 Chaque feuille de l'arbre représente alors l'aboutissement d'un des chemins proposés au rover.
