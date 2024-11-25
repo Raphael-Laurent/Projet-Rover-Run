@@ -9,7 +9,8 @@ t_map getRandomMap() {
     t_map map;
     char *listOfMapsWindows[] = {"..\\maps\\example1.map","..\\maps\\example2.map"};
     char *listOfMapsNotWindows[] = {"../maps/example1.map","../maps/example2.map"};
-    srand(time(NULL));    int mapNumber = rand() % 2;
+    int size = sizeof(listOfMapsWindows);
+    srand(time(NULL));    int mapNumber = rand() % size;
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile(listOfMapsWindows[mapNumber]);
 #else
