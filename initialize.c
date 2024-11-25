@@ -36,8 +36,8 @@ void printMapAndCost(t_map *map) {
     displayMap((*map));
 }
 
-t_tree getTree(t_map *map) {
-    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
+t_tree getTree(t_map *map, t_localisation rover, t_soil id_case) {
+    // rajouter taille arbre dans paramètres fonctions + localisation pour rover
     t_move avails[NB_RAND_MOVES];
     int move_proba[NONE];
     moveProbaInit(move_proba);
@@ -46,6 +46,19 @@ t_tree getTree(t_map *map) {
     t_tree mytree = createNTree(root, 3, rover, (*map));
     return mytree;
 }
+
+//void path( t_map map, t_move *avails){
+//    // partir d'une localisation pour générer un arbre n-aire, choisir le chemin le plus court et afficher le mouvement
+//    t_node *root = createNode(0, 7, avails, 0, rover, NONE);
+//    t_tree mytree = createNTree(root, 5, rover, map);
+//    //printNTree(mytree, map);
+//    t_node *min = NULL;
+//    min = minLocalisation(mytree.root, min, map);
+//    printPath(min, map);
+//    printPathSimple(min,map);
+//
+//    //displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
+//}
 
 void moveProbaInit(int proba[]) {
     proba[F_10] = 22;

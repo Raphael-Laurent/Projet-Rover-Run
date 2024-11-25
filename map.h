@@ -15,13 +15,14 @@ typedef enum e_soil
     PLAIN,
     ERG,
     REG,
-    CREVASSE
+    CREVASSE,
+    ROVER
 } t_soil;
 
 /**
  * @brief Array of costs for the soils
  */
-static const int _soil_cost[5] = {0, 1, 2, 4, 10000};
+static const int _soil_cost[6] = {0, 1, 2, 4, 10000, 2000};
 
 /**
  * @brief Structure for the map
@@ -54,5 +55,7 @@ t_map createMapFromFile(char *);
  * @param map : the map to display
  */
 void displayMap(t_map);
+
+void displayNewRoverLocation(t_map map, int x, int y);
 
 #endif //UNTITLED1_MAP_H

@@ -277,6 +277,16 @@ void displayMap(t_map map)
                             strcpy(c, "   ");
                         }
                         break;
+                    case ROVER:
+                        if (rep==1)
+                        {
+                            strcpy(c, " R ");
+                        }
+                        else
+                        {
+                            strcpy(c, "   ");
+                        }
+                        break;
                     case PLAIN:
                         strcpy(c, "---");
                         break;
@@ -300,4 +310,13 @@ void displayMap(t_map map)
 
     }
     return;
+}
+
+void displayNewRoverLocation(t_map map, int x, int y){
+    int temp;
+    temp = map.soils[y][x];
+    map.soils[y][x] = ROVER;
+    displayMap(map);
+    printf("---------------------------------------------------\n");
+    map.soils[y][x] = temp;
 }

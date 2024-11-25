@@ -34,7 +34,6 @@ typedef struct s_node
 */
 t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_localisation loc, t_move mov);
 
-
 typedef struct n_tree {
     t_node* root;
 } t_tree;
@@ -78,7 +77,7 @@ t_move *removeFromList(t_move*, t_move, int);
  * @brief fonction pour afficher l'ensemble de l'arbre n-aire dans la console
  * @param tree : arbre n-aire
 */
-void printNTree(t_tree tree);
+void printNTree(t_tree tree, t_map map);
 
 
 /**
@@ -102,13 +101,9 @@ void parcoursNTree(t_tree tree); //parcours préfixe d'un arbre n-aire
 */
 void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, t_move* current_moves, int depth);
 
+void printPath(t_node*, t_map);
 
-/**
- * @brief fonction pour afficher le chemin associé à un tableau de mouvements
- * @param *moves : tableau de mouvements
- * @param path_length : longueur du chemin
-*/
-void printPath(t_move* moves, int path_length);
+void printPathSimple(t_node *feuille, t_map map);
 
 
 /**
@@ -118,5 +113,7 @@ void printPath(t_move* moves, int path_length);
  * @param map : map avec les coûts pour le parcours
 */
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
+
+void path(t_tree, t_map, t_move*);
 
 #endif //UNTITLED1_N_TREE_H
