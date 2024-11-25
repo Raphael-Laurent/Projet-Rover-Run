@@ -34,8 +34,17 @@ t_move *removeFromList(t_move *list, t_move val, int len_list) {
     return new_list;
 }
 
-
 t_node *createNode(int val, int nd_sons, t_move *list_choix, int depth, t_localisation loc, t_move mov) {
+    /**
+     * @brief fonction récursive qui créée un arbre à partir du noeud racine
+     * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
+     * @param val : valeur à insérer
+     * @param nd_sons : nombre de fils à créer
+     * @param list_choix : liste de choix de mouvements
+     * @param depth : profondeur du noeud
+     * @param loc : localisation du rover
+     * @param mov : mouvement réalisé
+    */
     t_node *new_node;
     new_node = (t_node *) malloc(sizeof(t_node));
     new_node->value = val;
@@ -227,7 +236,6 @@ void deleteTree(t_tree *tree) {
 
 void deleteNode(t_node *node) {
     if (node == NULL) { return; }
-    printf("AAAAAAAAAAAAh %d",node->ndSons);
     for (int i = 0; i < node->ndSons; i++) {
         deleteNode(node->sons[i]);
     }

@@ -22,6 +22,7 @@ typedef struct s_node
 }t_node;
 
 t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_localisation loc, t_move mov);
+
 void insertNode(t_node node);
 
 void displayNode(t_node nodeToDisplay);
@@ -29,7 +30,6 @@ void displayNode(t_node nodeToDisplay);
 typedef struct n_tree {
     t_node* root;
 } t_tree;
-
 
 void deleteNode(t_node *node);
 

@@ -4,6 +4,10 @@
 #include "moves.h"
 #include "stdlib.h"
 #include "time.h"
+#include "initialize.h"
+
+void printTab(const int *tableau, int size);
+
 int main() {
     t_map map;
 
@@ -17,33 +21,7 @@ int main() {
 #endif
     srand(time(NULL));
 
-    printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
-    for (int i = 0; i < map.y_max; i++)
-    {
-        for (int j = 0; j < map.x_max; j++)
-        {
-            printf("%d ", map.soils[i][j]);
-        }
-        printf("\n");
-    }
-    // printf the costs, aligned left 5 digits
-    for (int i = 0; i < map.y_max; i++)
-    {
-        for (int j = 0; j < map.x_max; j++)
-        {
-            printf("%-5d ", map.costs[i][j]);
-        }
-        printf("\n");
-    }
-
-
-
-
-    //YOU CAN STOP THE MUSIC BUT YOU SURE CAN'T STOP CATRINA
-
-
-
-
+    printMapAndCost(&map);
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
@@ -58,28 +36,49 @@ int main() {
 
 
 
-/*
+
     t_move tableau[9];
     int proba[7];
-    proba[F_10] = 22;
-    proba[F_20] = 15;
-    proba[F_30] = 7;
-    proba[B_10] = 7;
-    proba[T_LEFT] = 21;
-    proba[T_RIGHT] = 21;
-    proba[U_TURN] = 7;
-    for (int i = 0; i < 7; i++) {
-        printf("%d ", proba[i]);
-    }
-    printf("\n");
+    moveProbaInit(proba);
+
+    /*
+    printTab(proba, 7); //Afficher les probabilités pour le debug
     randomMoves(proba, tableau);
-    for (int i = 0; i < 9; i++) {
-        printf("%s, ", _moves[tableau[i]]);
+    printRndMvs(tableau); //Afficher les moves pour le debug
+    printTab(proba, 7); //Afficher les probabilités pour le debug
+    */
+    t_tree mytree = getTree(&map);
+
+    // Affichage de l'arbre
+    printf("\nArbre n-aire:\n");
+    printNTree(mytree);
+
+    //Afficher le minimum de parcours
+    //t_node *min = minLocalisation(mytree.root, min, map);
+    //printf("%d\n",min->value);
+
+    //utilisation du chronomètre
+    clock_t start = chronometerInit();
+    /*
+     * exemple
+
+    for (int i = 0; i < 0xFFff; i++) {
+        for (int j = 0; j < 0xFFff; j++) {
+            for (int k = 0; k < 0xffff; k++) {
+                printf("%6.3lf secondes\r", ((double)(clock() - start)) / ((double)CLOCKS_PER_SEC));
+            }
+        }
     }
-    printf("\n");
-    for (int i = 0; i < 7; i++) {
-        printf("%d ", proba[i]);
-    }
-    printf("\n");*/
+    //
+    double deltaT = chronometerEnd(start);
+    */
     return 0;
 }
+
+void printTab(const int *tableau, int size) {
+    for (int i = 0; i < size-1; i++) {
+        printf("%d ", tableau[i]);
+    }
+    printf("%d \n", tableau[size-1]);
+}
+

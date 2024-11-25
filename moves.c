@@ -4,6 +4,7 @@
 
 #include "moves.h"
 
+
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
 
@@ -162,7 +163,7 @@ void randomMoves(int probs[], t_move array[]) {
     int interval;
 
     srand(time(NULL));
-    for (int i = 0; i <= numVal; i++) {
+    for (int i = 0; i < numVal; i++) {
         randVal = (rand()%(totalCoef))+1;
         noResult = 1;
         interval = 0;
@@ -179,5 +180,12 @@ void randomMoves(int probs[], t_move array[]) {
             array[i] = NONE;
         }
     }
+}
+
+void printRndMvs(t_move array[]) {
+    for (int i = 0; i < NB_RAND_MOVES-1; i++) {
+        printf("%s, ", _moves[array[i]]);
+    }
+    printf("%s \n", _moves[array[NB_RAND_MOVES- 1]]);
 }
 
