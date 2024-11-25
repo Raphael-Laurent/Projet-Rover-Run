@@ -45,4 +45,7 @@ double chronometerEnd(clock_t start);
 */
 void moveProbaInit(int proba[]);
 
+
+t_map getRandomMap();
+
 #endif //ROVER_RUN_INITIALIZE_H

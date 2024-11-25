@@ -3,7 +3,20 @@
 //
 
 #include "initialize.h"
+#include "stdlib.h"
 
+t_map getRandomMap() {
+    t_map map;
+    char *listOfMapsWindows[] = {"..\\maps\\example1.map","..\\maps\\example2.map"};
+    char *listOfMapsNotWindows[] = {"../maps/example1.map","../maps/example2.map"};
+    srand(time(NULL));    int mapNumber = rand() % 2;
+#if defined(_WIN32) || defined(_WIN64)
+    map = createMapFromFile(listOfMapsWindows[mapNumber]);
+#else
+    map = createMapFromFile(listOfMapsNotWindows[mapNumber]);
+#endif
+    return map;
+}
 
 void printMapAndCost(t_map *map) {
     printf("Map created with dimensions %d x %d\n", (*map).y_max, (*map).x_max);

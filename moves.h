@@ -10,12 +10,12 @@
 
 /**
  * @brief Array of strings for the possible moves of the robot
- */
+*/
 static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn", "None"};
 
 /**
  * @brief Enum for the possible moves of the robot
- */
+*/
 
 typedef enum e_move
 {
@@ -33,7 +33,7 @@ typedef enum e_move
  * @brief function to get a t_move as a string
  * @param move : the move to convert
  * @return the string corresponding to the move
- */
+*/
 char *getMoveAsString(t_move move);
 
 /**
@@ -41,7 +41,7 @@ char *getMoveAsString(t_move move);
  * @param loc : the localisation of the robot
  * @param move : the move to do
  * @return the new localisation of the robot
- */
+*/
 t_localisation move(t_localisation, t_move);
 
 /**
@@ -49,12 +49,12 @@ t_localisation move(t_localisation, t_move);
  * @param p_loc : the pointer to the localisation of the robot
  * @param move : the move to do
  * @return none
- */
+*/
 void updateLocalisation(t_localisation *, t_move);
 
 /*
  * Random movements
- */
+*/
     
 
 

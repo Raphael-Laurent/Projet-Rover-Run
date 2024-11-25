@@ -9,17 +9,7 @@
 void printTab(const int *tableau, int size);
 
 int main() {
-    t_map map;
-
-    // The following preprocessor directive checks if the code is being compiled on a Windows system.
-    // If either _WIN32 or _WIN64 is defined, it means we are on a Windows platform.
-    // On Windows, file paths use backslashes (\), hence we use the appropriate file path for Windows.
-#if defined(_WIN32) || defined(_WIN64)
-    map = createMapFromFile("..\\maps\\example1.map");
-#else
-    map = createMapFromFile("../maps/example1.map");
-#endif
-    srand(time(NULL));
+    t_map map = getRandomMap();
 
     printMapAndCost(&map);
     // -----TEST------------------------------------------------------------------
