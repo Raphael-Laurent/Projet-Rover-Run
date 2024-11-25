@@ -25,14 +25,10 @@ int main() {
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
-    t_localisation rover;
-    rover = loc_init(4,3, NORTH); //on initialise la position du rover
     t_move avails[7] = {F_10, F_20,F_20, B_10,F_30, U_TURN, T_RIGHT};
 
-    displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
     printf("\n\n");
 
-    path(rover, map, avails);
 
 
 
@@ -47,11 +43,15 @@ int main() {
     printRndMvs(tableau); //Afficher les moves pour le debug
     printTab(proba, 7); //Afficher les probabilités pour le debug
     */
-    t_tree mytree = getTree(&map);
+
+    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
+    displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
+
+    t_tree mytree = getTree(&map, rover, ROVER);
 
     // Affichage de l'arbre
-    printf("\nArbre n-aire:\n");
-    printNTree(mytree);
+//    printf("\nArbre n-aire:\n");
+    //printNTree(mytree, map);
 
     //Afficher le minimum de parcours
     //t_node *min = minLocalisation(mytree.root, min, map);

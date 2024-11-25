@@ -189,13 +189,11 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
     return min_node;
 }
 
-void path(t_localisation rover, t_map map, t_move *avails){
-    // partir d'une localisation pour générer un arbre n-aire, choisir le chemin le plus court et afficher le mouvement
-    t_node *root = createNode(0, 7, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 5, rover, map);
+void path(t_tree tree, t_map map, t_move *avails){
+    // choisir le chemin le plus court et afficher le mouvement
     //printNTree(mytree, map);
     t_node *min = NULL;
-    min = minLocalisation(mytree.root, min, map);
+    min = minLocalisation(tree.root, min, map);
     printPath(min, map);
     printPathSimple(min,map);
 
