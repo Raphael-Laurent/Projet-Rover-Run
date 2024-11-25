@@ -12,4 +12,4 @@ Notre algorithme permet donc au robot de choisir soit un chemin qui dépense le 
 Pour pouvoir calculer tous les chemins possibles, nous avons implémenté une structure d'arbre n-aire.
 Chaque feuille de l'arbre représente alors l'aboutissement d'un des chemins proposés au rover.
 
-- ![#f03c15](mqklsdjfq)
+<span style="color: red;">Texte en rouge</span>
