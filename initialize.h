@@ -13,7 +13,7 @@
 
 void printMapAndCost(t_map *map);
 
-t_tree getTree(t_map *map, t_localisation rover, t_soil id_case);
+t_tree getTree(t_map *map, t_localisation rover);
 
 clock_t chronometerInit();
 

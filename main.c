@@ -29,10 +29,6 @@ int main() {
 
     printf("\n\n");
 
-
-
-
-
     t_move tableau[9];
     int proba[7];
     moveProbaInit(proba);
@@ -44,10 +40,11 @@ int main() {
     printTab(proba, 7); //Afficher les probabilités pour le debug
     */
 
-    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
+    t_localisation rover = loc_init(0,4, NORTH); //on initialise la position du rover
     displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
 
-    t_tree mytree = getTree(&map, rover, ROVER);
+    t_tree mytree = getTree(&map, rover);
+
 
     // Affichage de l'arbre
 //    printf("\nArbre n-aire:\n");

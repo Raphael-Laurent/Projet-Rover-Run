@@ -11,7 +11,7 @@
 /**
  * @brief Array of strings for the possible moves of the robot
  */
-static char _moves[8][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn", "None"};
+static char _moves[9][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T right", "U-turn", "None", "Zero"};
 
 /**
  * @brief Enum for the possible moves of the robot
@@ -26,7 +26,8 @@ typedef enum e_move
     T_LEFT, // Turn left (+90°)
     T_RIGHT, // Turn right (-90°)
     U_TURN,
-    NONE
+    NONE, // Root of the tree
+    ZERO, // Nothing happens
 } t_move;
 
 /**
@@ -65,5 +66,8 @@ void randomMoves(int probs[], t_move array[]);
 void printRndMvs(t_move array[]);
 
 void printRndMvs(t_move array[]);
+
+t_move updateERGMovement(t_move move);
+
 
 #endif //UNTITLED1_MOVES_Hdad

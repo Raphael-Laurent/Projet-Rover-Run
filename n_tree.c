@@ -69,19 +69,25 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
      * @param node : noeud
      * @param size : taille de l'arbre
     */
+    printf("[at the level : %d] [value of the soil : %d] : %s -->", node->depth,map.soils[node->local.pos.y][node->local.pos.x],getMoveAsString(node->move));
+    for(int k = 0; k < node->ndSons; k++){
+        printf("%s ", getMoveAsString(node->avails[k]));
+    }
+    printf("\n");
     if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 && map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size){
         int i;
         for (i = 0; i < node->ndSons; i++) {
 
             // nouvelle position utilisant le mouvement avails[i]
             t_localisation new_loc;
-            new_loc = move(loc, node->avails[i]);
+            t_move move_id = node->avails[i];
+            if(map.soils[node->local.pos.y][node->local.pos.x] == 2){
+                move_id = updateERGMovement(node->avails[i]);
+            }
+            new_loc = move(loc, move_id);
 
             int new_val;
-            if (isValidLocalisation(new_loc.pos, 6, 7)) {
-                if(node->move == F_10 && node->value == 5 && node->parent->value == 0) {
-                    printf("%s",getMoveAsString(node->avails[i]));
-                }
+            if (isValidLocalisation(new_loc.pos, map.x_max, map.y_max)) {
                 new_val = map.costs[new_loc.pos.y][new_loc.pos.x];
 
                 t_move *new_avails;
@@ -90,7 +96,7 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
 
                 // on créé un nouveau fils du noeud
                 t_node *new_son = createNode(node->value + new_val, node->ndSons - 1, new_avails, node->depth + 1, new_loc,
-                                             node->avails[i]);
+                                             move_id);
 
                 new_son->parent = node;
                 node->sons[i] = new_son;
@@ -117,7 +123,7 @@ void printNTree(t_tree tree, t_map map) {
         printf("    ");  // Ajoute 4 espaces pour chaque niveau de profondeur
     }
     // Afficher la loc et la value du nœud
-    printf("loc : %d/%d//%s ; cost : %d ; value : %d ; direction : %s ", tree.root->local.pos.x, tree.root->local.pos.y,
+    printf("loc : %d/%d//%s ; cost : %d ; value : %d ; Move : %s ", tree.root->local.pos.x, tree.root->local.pos.y,
            getOriAsString(tree.root->local.ori), map.costs[tree.root->local.pos.y][tree.root->local.pos.x], tree.root->value, getMoveAsString(tree.root->move));
     if (tree.root->parent != NULL) {
         printf("; value of the parent : %d ; depth : %d", tree.root->parent->value, tree.root->depth);
@@ -147,27 +153,6 @@ void parcoursNTree(t_tree tree) {
     }
 }
 
-void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min_path, int *path_length, t_node **current_path, t_move *current_moves, int depth) {
-    if (node == NULL) { return; }
-
-    current_cost += node->value;
-    current_path[depth] = node;
-
-    if (node->ndSons == 0) {
-        if (current_cost < *min_cost) {
-            *min_cost = current_cost;
-            *min_path = node;
-            *path_length = depth + 1;
-        }
-    }
-
-    for (int i = 0; i < node->ndSons; i++) {
-        current_moves[depth] = node->avails[i];  // Record move leading to child
-        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, current_moves,depth + 1);
-    }
-}
-
-
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
     if(current_node->ndSons == 0) {
@@ -189,13 +174,13 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map){
     return min_node;
 }
 
-void path(t_tree tree, t_map map, t_move *avails){
+void path(t_tree tree, t_map map){
     // choisir le chemin le plus court et afficher le mouvement
-    //printNTree(mytree, map);
+    printNTree(tree, map);
     t_node *min = NULL;
     min = minLocalisation(tree.root, min, map);
-    printPath(min, map);
-    printPathSimple(min,map);
+    //printPath(min, map);
+    //printPathSimple(min,map);
 
     //displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
 }

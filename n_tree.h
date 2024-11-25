@@ -51,6 +51,8 @@ void printPathSimple(t_node *feuille, t_map map);
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
 
-void path(t_tree, t_map, t_move*);
+void path(t_tree, t_map);
+
+void updateMovementERG(t_node *node, t_move *new_avail, t_map map);
 
 #endif //UNTITLED1_N_TREE_H
