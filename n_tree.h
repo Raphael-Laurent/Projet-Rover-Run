@@ -58,19 +58,20 @@ void deleteTree(t_tree *tree);
  * chaque nouveau étage de noeud possède une nouvelle liste avails qui correspond aux choix possibles
  * @param node : noeud
  * @param size : taille de l'arbre
+ * @param loc : localisation du rover
  * @param map : map des coûts
  */
-t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map); //créé un arbre n-aire de déplacements à partir d'un t_node
+t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map);
 
 
 /**
  * @brief enlève une valeur d'une liste, renvoie la liste sans la valeur
  * si la valeur n'est pas dans la liste, cela ne change rien
- * @param list : liste contenant toutes les valeurs
+ * @param *list : liste contenant toutes les valeurs
  * @param val : valeur que l'on veut retirer de la liste
  * @param len_list : longueur de la liste
 */
-t_move *removeFromList(t_move*, t_move, int);
+t_move *removeFromList(t_move *list, t_move val, int len_list);
 
 
 /**
@@ -88,21 +89,18 @@ void parcoursNTree(t_tree tree); //parcours préfixe d'un arbre n-aire
 
 
 /**
- * @brief fonction pour trouver le parcours avec le coût minimum dans l'arbre n-aire
- * @param *node : jsp encore
- * @param currenct_cost : coût actuel du parcour associé
- * @param *min_cost : adresse de la valeur minimum du parcours
- * @param **min_path : tableau pour stocker le parcour minimum
- * @param *path_length : adresse de la valeur de la longueur du chemin
- * @param **current_path : tableau pour stocker le chemin actuel
- * @param *current_moves : jsp
- * @param depth : profondeur actuelle du chemin
- *
+ * @brief fonction pour afficher le chemin en fonction de la map
+ * @param *feuille : noeud d'origine
+ * @param map : map pour le chemin
 */
-void findMinCostPath(t_node* node, int current_cost, int* min_cost, t_node** min_path, int* path_length, t_node** current_path, t_move* current_moves, int depth);
+void printPath(t_node *feuille, t_map map);
 
-void printPath(t_node*, t_map);
 
+/**
+ * @brief fonction pour afficher le chemin en fonction de la map mais de façon simplifiée
+ * @param *feuille : noeud d'origine
+ * @param map : map pour le chemin
+*/
 void printPathSimple(t_node *feuille, t_map map);
 
 
@@ -114,6 +112,12 @@ void printPathSimple(t_node *feuille, t_map map);
 */
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
 
-void path(t_tree, t_map, t_move*);
+
+/**
+ * @brief fonction pour afficher le chemin le plus court
+ * @param *feuille : noeud d'origine
+ * @param map : map pour le chemin
+*/
+void path(t_tree tree, t_map map);
 
 #endif //UNTITLED1_N_TREE_H

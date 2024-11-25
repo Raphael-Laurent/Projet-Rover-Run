@@ -15,11 +15,8 @@ int main() {
     // -----TEST------------------------------------------------------------------
     //map.costs = les coûts
 
-    t_move avails[7] = {F_10, F_20,F_20, B_10,F_30, U_TURN, T_RIGHT};
-
     printf("\n");
 
-    t_move tableau[9];
     int proba[7];
     moveProbaInit(proba);
 
@@ -40,24 +37,10 @@ int main() {
     printNTree(mytree, map);
 
     //Afficher le minimum de parcours
-    //t_node *min = minLocalisation(mytree.root, min, map);
-    //printf("%d\n",min->value);
+    t_node *min = minLocalisation(mytree.root, min, map);
+    path(mytree, map);
+    printf("%d\n",min->value);
 
-    //utilisation du chronomètre
-    clock_t start = chronometerInit();
-    /*
-     * exemple
-
-    for (int i = 0; i < 0xFFff; i++) {
-        for (int j = 0; j < 0xFFff; j++) {
-            for (int k = 0; k < 0xffff; k++) {
-                printf("%6.3lf secondes\r", ((double)(clock() - start)) / ((double)CLOCKS_PER_SEC));
-            }
-        }
-    }
-    //
-    double deltaT = chronometerEnd(start);
-    */
     return 0;
 }
 

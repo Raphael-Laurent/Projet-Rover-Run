@@ -128,32 +128,9 @@ void parcoursNTree(t_tree tree) {
     }
 }
 
-void findMinCostPath(t_node *node, int current_cost, int *min_cost, t_node **min_path, int *path_length,
-                     t_node **current_path, t_move *current_moves, int depth) {
-    if (node == NULL) { return; }
-
-    current_cost += node->value;
-    current_path[depth] = node;
-
-    if (node->ndSons == 0) {
-        if (current_cost < *min_cost) {
-            *min_cost = current_cost;
-            *min_path = node;
-            *path_length = depth + 1;
-        }
-    }
-
-    for (int i = 0; i < node->ndSons; i++) {
-        current_moves[depth] = node->avails[i];  // Record move leading to child
-        findMinCostPath(node->sons[i], current_cost, min_cost, min_path, path_length, current_path, current_moves,
-                        depth + 1);
-    }
-}
-
 
 t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map) {
     if (current_node->ndSons == 0) {
-        //printf("%d %d     \n",map.costs[current_node->local.pos.y][current_node->local.pos.x],map.costs[current_node->local.pos.y][current_node->local.pos.x]==0);
         if (min_node == NULL || map.costs[current_node->local.pos.y][current_node->local.pos.x] == 0) {
             min_node = current_node;
         } else if (map.costs[min_node->local.pos.y][min_node->local.pos.x] == 0) {
@@ -171,15 +148,11 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map) {
     return min_node;
 }
 
-void path(t_tree tree, t_map map, t_move *avails) {
-    // choisir le chemin le plus court et afficher le mouvement
-    //printNTree(mytree, map);
+void path(t_tree tree, t_map map) {
     t_node *min = NULL;
     min = minLocalisation(tree.root, min, map);
     printPath(min, map);
     printPathSimple(min, map);
-
-    //displayNewRoverLocation(map,min->local.pos.x,min->local.pos.y);
 }
 
 void printPath(t_node *feuille, t_map map) {
