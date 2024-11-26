@@ -4,12 +4,13 @@
 
 #ifndef UNTITLED1_QUEUE_H
 #define UNTITLED1_QUEUE_H
+
 #include "loc.h"
+
 /**
  * @brief Structure for the queue of integers
  */
-typedef struct s_queue
-{
+typedef struct s_queue {
     t_position *values;
     int size;
     int last;
@@ -29,7 +30,7 @@ t_queue createQueue(int);
  * @param value : the position to enqueue
  * @return none
  */
-void enqueue(t_queue *,t_position);
+void enqueue(t_queue *, t_position);
 
 /**
  * @brief Function to dequeue a value from the queue

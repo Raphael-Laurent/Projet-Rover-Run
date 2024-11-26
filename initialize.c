@@ -7,8 +7,8 @@
 
 t_map getRandomMap() {
     t_map map;
-    char *listOfMapsWindows[] = {"..\\maps\\example1.map", "..\\maps\\example2.map"};
-    char *listOfMapsNotWindows[] = {"../maps/example1.map", "../maps/example2.map"};
+    char *listOfMapsWindows[] = {"..\\maps\\example1.map", "..\\maps\\example2.map","..\\maps\\bigmap.map"};
+    char *listOfMapsNotWindows[] = {"../maps/example1.map", "../maps/example2.map","../maps/bigmap.map"};
     int sizeOfMap = sizeof(listOfMapsWindows) / sizeof(listOfMapsWindows[0]);
     srand(time(NULL));
     int mapNumber = rand() % sizeOfMap;

@@ -4,13 +4,13 @@
 
 #ifndef UNTITLED1_N_TREE_H
 #define UNTITLED1_N_TREE_H
+
 #include "loc.h"
 #include "moves.h"
 #include "map.h"
 
 
-typedef struct s_node
-{
+typedef struct s_node {
     int value;//coût du déplacement
     int depth;//profondeur du noeud dans son arbre
     t_move move;
@@ -19,7 +19,7 @@ typedef struct s_node
     t_move *avails; //choix restants du noeud
     t_localisation local; // localisation du robot sur la map au "moment" du noeud
     struct s_node *parent;
-}t_node;
+} t_node;
 
 
 /**
@@ -32,10 +32,10 @@ typedef struct s_node
  * @param loc : localisation du rover
  * @param mov : mouvement réalisé
 */
-t_node *createNode(int val, int nd_sons, t_move* list_choix, int depth, t_localisation loc, t_move mov);
+t_node *createNode(int val, int nd_sons, t_move *list_choix, int depth, t_localisation loc, t_move mov);
 
 typedef struct n_tree {
-    t_node* root;
+    t_node *root;
 } t_tree;
 
 
@@ -120,9 +120,12 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
 */
 void path(t_tree tree, t_map map);
 
-
+/**
+ * @brief permet de déplacer le rover jusqu'à la position souhaitée en suivant le chemin minimum
+ * @param *feuille : noeud d'origine
+ * @param map : map pour le chemin
+ * @param rover : position d'origine du rover
+*/
 t_localisation goToArea(t_node *feuille, t_map map, t_localisation rover);
-
-void updateMovementERG(t_node *node, t_move *new_avail, t_map map);
 
 #endif //UNTITLED1_N_TREE_H
