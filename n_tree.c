@@ -182,7 +182,6 @@ void printPath(t_node *feuille, t_map map) {
         printf("The robot does the movement : %s \n", getMoveAsString(feuille->move));
     }
     displayNewRoverLocation(map, feuille->local.pos.x, feuille->local.pos.y);
-    printf("%d", feuille->value);
     printf("\n");
 }
 

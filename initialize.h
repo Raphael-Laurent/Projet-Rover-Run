@@ -58,4 +58,11 @@ void moveProbaInit(int proba[]);
 */
 t_map getRandomMap();
 
+
+void simulation();
+
+
+void NTreePrintExemple();
+
+
 #endif //ROVER_RUN_INITIALIZE_H
