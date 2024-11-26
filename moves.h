@@ -4,6 +4,7 @@
 
 #ifndef UNTITLED1_MOVES_H
 #define UNTITLED1_MOVES_H
+
 #include <stdlib.h>
 #include <time.h>
 #include "loc.h"
@@ -17,8 +18,7 @@ static char _moves[9][8] = {"F 10m", "F 20m", "F 30m", "B 10m", "T left", "T rig
  * @brief Enum for the possible moves of the robot
 */
 
-typedef enum e_move
-{
+typedef enum e_move {
     F_10, // Forward 10 m
     F_20, // Forward 20 m
     F_30, // Forward 30 m
@@ -56,17 +56,21 @@ void updateLocalisation(t_localisation *, t_move);
 /*
  * Random movements
 */
-    
-
 
 #define NB_RAND_MOVES 9
 
+
+/**
+ * @brief modifie les tableau de mouvements et de probabilités
+ * @param probs[] : tableau de probabilités
+ * @param array[] : tableau de mouvements
+*/
 void randomMoves(int probs[], t_move array[]);
 
-void printRndMvs(t_move array[]);
-
-void printRndMvs(t_move array[]);
-
+/**
+ * @brief modifie le mouvement en fonction de la case
+ * @param t_move : mouvement
+*/
 t_move updateERGMovement(t_move move);
 
 

@@ -29,7 +29,7 @@ int main() {
         t_node *min = minLocalisation(mytree.root, NULL, map);
 
         if (map.costs[min->local.pos.y][min->local.pos.x] == 0) {
-            printf("\nBase found at (%d, %d)!\n", min->local.pos.x, min->local.pos.y);
+            printf("\nBase found at (%d, %d) with a fuel usage of : %d !\n", min->local.pos.x, min->local.pos.y,min->value);
             base_found = 1;
         } else {
             total_min_value += min->value;
