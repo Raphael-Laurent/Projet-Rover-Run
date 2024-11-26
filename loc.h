@@ -4,6 +4,7 @@
 
 #ifndef UNTITLED1_LOC_H
 #define UNTITLED1_LOC_H
+
 #include "map.h"
 #include "stdio.h"
 
@@ -14,8 +15,7 @@ static char _oris[4][8] = {"NORTH", "EAST", "SOUTH", "WEST"};
 /**
  * @brief Enum for the orientation of the robot (NORTH, EAST, SOUTH, WEST)
  */
-typedef enum e_orientation
-{
+typedef enum e_orientation {
     NORTH,
     EAST,
     SOUTH,
@@ -25,8 +25,7 @@ typedef enum e_orientation
 /**
  * @brief Structure for the position of the robot
  */
-typedef struct e_position
-{
+typedef struct e_position {
     int x;
     int y;
 } t_position;
@@ -34,10 +33,9 @@ typedef struct e_position
 /**
  * @brief Structure for the localisation of the robot
  */
-typedef struct s_localisation
-{
-    t_position      pos;
-    t_orientation   ori;
+typedef struct s_localisation {
+    t_position pos;
+    t_orientation ori;
 } t_localisation;
 
 /**

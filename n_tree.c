@@ -46,14 +46,15 @@ t_node *createNode(int val, int nd_sons, t_move *list_choix, int depth, t_locali
 
 
 t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
-    if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 && map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size){
+    if ((map.costs[node->local.pos.y][node->local.pos.x] < 1000 &&
+         map.costs[node->local.pos.y][node->local.pos.x] != 0) && node->depth < size) {
         int i;
         for (i = 0; i < node->ndSons; i++) {
 
             // nouvelle position utilisant le mouvement avails[i]
             t_localisation new_loc;
             t_move move_id = node->avails[i];
-            if(map.soils[node->local.pos.y][node->local.pos.x] == 2){
+            if (map.soils[node->local.pos.y][node->local.pos.x] == 2) {
                 move_id = updateERGMovement(node->avails[i]);
                 node->avails[i] = move_id;
             }
@@ -68,8 +69,11 @@ t_tree createNTree(t_node *node, int size, t_localisation loc, t_map map) {
                 new_avails = removeFromList(node->avails, node->avails[i], node->ndSons);
 
                 // on créé un nouveau fils du noeud
-                t_node *new_son = createNode(node->value + new_val, node->ndSons - 1, new_avails, node->depth + 1, new_loc,
-                                             move_id);
+                t_node *new_son = createNode(node->value + new_val, node->ndSons - 1, new_avails, node->depth + 1,new_loc,move_id);
+
+                if(node->avails[i] == T_LEFT || node->avails[i] == T_RIGHT || node->avails[i] == U_TURN) {
+                    new_son->value = node->value;
+                }
 
                 new_son->parent = node;
                 node->sons[i] = new_son;
@@ -178,6 +182,7 @@ void printPath(t_node *feuille, t_map map) {
         printf("The robot does the movement : %s \n", getMoveAsString(feuille->move));
     }
     displayNewRoverLocation(map, feuille->local.pos.x, feuille->local.pos.y);
+    printf("%d", feuille->value);
     printf("\n");
 }
 

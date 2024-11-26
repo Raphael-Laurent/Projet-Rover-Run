@@ -12,8 +12,6 @@ add_executable(main main.c
         map.h
         queue.c
         queue.h
-        stack.c
-        stack.h
         n_tree.c
         n_tree.h
         initialize.c
