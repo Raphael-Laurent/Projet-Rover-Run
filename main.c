@@ -4,7 +4,7 @@
 #include "moves.h"
 #include "initialize.h"
 
-void simulation() {
+void simulation() { // Effectue une simulation complète du trajet du Rover jusqu'à sa base
     t_map map = getRandomMap();
     int total_min_value = 0;
     int base_found = 0;
@@ -44,7 +44,7 @@ void simulation() {
     }
 }
 
-void NTreePrintExemple() {
+void NTreePrintExemple() { // Affiche l'arbre taille réduite des déplacement du Rover sur une map aléatoire
     t_localisation rover = loc_init(4, 3, NORTH);
     t_map map = getRandomMap();
     t_move avails[NB_RAND_MOVES];
