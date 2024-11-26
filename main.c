@@ -47,14 +47,13 @@ void simulation() {
 void NTreePrintExemple() {
     t_localisation rover = loc_init(4, 3, NORTH);
     t_map map = getRandomMap();
-    t_move* avails = (t_move*)malloc(sizeof(t_move) * NB_RAND_MOVES);
+    t_move avails[NB_RAND_MOVES];
     int move_proba[NONE];
     moveProbaInit(move_proba);
     randomMoves(move_proba, avails);
     t_node* root = createNode(0, NB_RAND_MOVES, avails, 0, rover, NONE);
     t_tree exTree = createNTree(root, 4, rover, map);
     printNTree(exTree, map);
-    deleteTree(&exTree);
 }
 
 int main() {
