@@ -3,26 +3,13 @@
 <br><br>
 
 ## Description :
+Ce repository a été créé dans le cadre de notre projet semestriel lors de notre deuxième année de Programme Grande Ecole Ingénieurs à l'EFREI. Nous avons dû réaliser **une simulation de déplacement d'un rover** sur Mars qui doit prendre en compte le terrain sur lequel il évolue et la quantité de fuel qu'il consomme afin de rejoindre sa base.  
+Les fichiers loc, map, 
 
-Dans le cadre d'un projet semestriel lors de notre deuxième année de Programme Grande Ecole Ingénieurs à l'EFREI, nous avons réalisé une simulation de déplacement d'un rover. Ces déplacements tiennent compte de plusieurs facteurs comme le terrain et le fuel dépensé.  
-
-
-## Fonctionnalités
-
-Dans le cadre d'une mission sur Mars, nous devons aider un rover à atteindre sa base, avec une dépense de fuel minimum. 
-Le coût d'un trajet est défini par le type de terrain que le rover traverse, et les mouvements qu'il peut effectuer sont décidés aléatoirement.    
-
-Ainsi, nous avons dû créer un algorithme permettant au rover d'effectuer des "manches" où plusieurs chemins lui sont proposés selon les mouvements qui sont tirés au hasard.\n
-Notre algorithme permet donc au robot de choisir soit un chemin qui dépense le moins de fuel, soit de choisir un chemin qui le mène directement à la base.  
-
-Pour pouvoir calculer tous les chemins possibles, nous avons implémenté une structure d'arbre n-aire.  
-Chaque feuille de l'arbre représente alors l'aboutissement d'un des chemins proposés au rover.  
-
-
-## 📖 Description
-
-*Rover-Run!* est un projet universitaire réalisé dans le cadre du module TI301. Le but est de concevoir et développer un programme en langage **C** simulant les déplacements d'un rover autonome sur une grille, en tenant compte de diverses contraintes (obstacles, énergie, itinéraires optimaux, etc.).
-
+## Fonctionnalités :
+- Implémentation d'un arbre n-aire où chaque noeuds correspond à un mouvement potentiel fait par le rover.
+- Calcul du chemin entre la feuille la plus petite d'un arbre n-aire et sa racine.
+- 
 
 ## 🛠️ Fonctionnalités
 
@@ -32,3 +19,5 @@ Chaque feuille de l'arbre représente alors l'aboutissement d'un des chemins pro
 - Interface console interactive pour paramétrer la grille et suivre les déplacements.
 - Fichiers de configuration pour personnaliser les scénarios.
 
+## Utilisation :
+Un code déjà inscrit dans le main.c permet 
