@@ -123,4 +123,6 @@ void path(t_tree tree, t_map map);
 
 t_localisation goToArea(t_node *feuille, t_map map, t_localisation rover);
 
+void updateMovementERG(t_node *node, t_move *new_avail, t_map map);
+
 #endif //UNTITLED1_N_TREE_H

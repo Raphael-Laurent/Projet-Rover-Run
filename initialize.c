@@ -41,12 +41,27 @@ void printMapAndCost(t_map *map) {
 
 t_tree getTree(t_map *map, t_localisation rover) {
     // rajouter taille arbre dans paramètres fonctions + localisation pour rover
+    t_soil id_case = map->soils[rover.pos.y][rover.pos.x];
     t_move avails[NB_RAND_MOVES];
     int move_proba[NONE];
     moveProbaInit(move_proba);
     randomMoves(move_proba, avails);
-    t_node *root = createNode(0, 5, avails, 0, rover, NONE);
-    t_tree mytree = createNTree(root, 3, rover, (*map));
+    for(int move = 0; move < NB_RAND_MOVES; move++){
+        printf("%s --> ", getMoveAsString(avails[move]));
+    }
+    printf("\n");
+    int size;
+    if(id_case == REG) {
+            size = 2;
+    }else{
+        size = 3;
+    }
+    printf("size : %d\n",size);
+
+    t_node *root = createNode(0, 3, avails, 0, rover, NONE);
+//}
+    t_tree mytree = createNTree(root, size, rover, (*map));
+    path(mytree, *map);
     return mytree;
 }
 

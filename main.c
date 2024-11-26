@@ -2,11 +2,7 @@
 #include "map.h"
 #include "n_tree.h"
 #include "moves.h"
-#include "stdlib.h"
-#include "time.h"
 #include "initialize.h"
-
-void printTab(const int *tableau, int size);
 
 int main() {
     t_map map = getRandomMap();
@@ -53,12 +49,3 @@ int main() {
 
     return 0;
 }
-
-
-void printTab(const int *tableau, int size) {
-    for (int i = 0; i < size-1; i++) {
-        printf("%d ", tableau[i]);
-    }
-    printf("%d \n", tableau[size-1]);
-}
-

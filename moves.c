@@ -189,3 +189,17 @@ void printRndMvs(t_move array[]) {
     printf("%s \n", _moves[array[NB_RAND_MOVES- 1]]);
 }
 
+t_move updateERGMovement(t_move move){
+    switch (move){
+        case F_10:
+            return ZERO;
+        case F_20:
+            return F_10;
+        case F_30:
+            return F_20;
+        case B_10:
+            return ZERO;
+        default:
+            return move;
+    }
+}
