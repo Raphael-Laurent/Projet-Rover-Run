@@ -7,10 +7,11 @@
 
 t_map getRandomMap() {
     t_map map;
-    char *listOfMapsWindows[] = {"..\\maps\\example1.map","..\\maps\\example2.map"};
-    char *listOfMapsNotWindows[] = {"../maps/example1.map","../maps/example2.map"};
-    int sizeOfMap = sizeof(listOfMapsWindows)/sizeof(listOfMapsWindows[0]);
-    srand(time(NULL));    int mapNumber = rand() % sizeOfMap;
+    char *listOfMapsWindows[] = {"..\\maps\\example1.map", "..\\maps\\example2.map"};
+    char *listOfMapsNotWindows[] = {"../maps/example1.map", "../maps/example2.map"};
+    int sizeOfMap = sizeof(listOfMapsWindows) / sizeof(listOfMapsWindows[0]);
+    srand(time(NULL));
+    int mapNumber = rand() % sizeOfMap;
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile(listOfMapsWindows[mapNumber]);
 #else
@@ -46,20 +47,18 @@ t_tree getTree(t_map *map, t_localisation rover) {
     int move_proba[NONE];
     moveProbaInit(move_proba);
     randomMoves(move_proba, avails);
-    for(int move = 0; move < NB_RAND_MOVES; move++){
+    for (int move = 0; move < NB_RAND_MOVES; move++) {
         printf("%s --> ", getMoveAsString(avails[move]));
     }
     printf("\n");
     int size;
-    if(id_case == REG) {
-            size = 2;
-    }else{
-        size = 3;
+    if (id_case == REG) {
+        size = 4;
+    } else {
+        size = 5;
     }
-    printf("size : %d\n",size);
-
-    t_node *root = createNode(0, 3, avails, 0, rover, NONE);
-//}
+    printf("size : %d\n", size);
+    t_node *root = createNode(0, NB_RAND_MOVES, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, size, rover, (*map));
     path(mytree, *map);
     return mytree;
@@ -82,6 +81,6 @@ clock_t chronometerInit() {
 
 double chronometerEnd(clock_t start) {
     clock_t end = clock();
-    double dt = ((double)(end - start)) / ((double)CLOCKS_PER_SEC);
+    double dt = ((double) (end - start)) / ((double) CLOCKS_PER_SEC);
     return dt;
 }

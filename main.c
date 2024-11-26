@@ -24,7 +24,7 @@ int main() {
         t_tree mytree = getTree(&map, rover);
 
         printf("\nGenerated Tree:\n");
-        printNTree(mytree, map);
+        //printNTree(mytree, map);
 
         t_node *min = minLocalisation(mytree.root, NULL, map);
 
