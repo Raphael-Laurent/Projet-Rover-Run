@@ -37,7 +37,6 @@ void printMapAndCost(t_map *map) {
         printf("\n");
     }
     printf("\n");
-    displayMap((*map));
 }
 
 t_tree getTree(t_map *map, t_localisation rover) {
@@ -47,17 +46,12 @@ t_tree getTree(t_map *map, t_localisation rover) {
     int move_proba[NONE];
     moveProbaInit(move_proba);
     randomMoves(move_proba, avails);
-    for (int move = 0; move < NB_RAND_MOVES; move++) {
-        printf("%s --> ", getMoveAsString(avails[move]));
-    }
-    printf("\n");
     int size;
     if (id_case == REG) {
         size = 4;
     } else {
         size = 5;
     }
-    printf("size : %d\n", size);
     t_node *root = createNode(0, NB_RAND_MOVES, avails, 0, rover, NONE);
     t_tree mytree = createNTree(root, size, rover, (*map));
     path(mytree, *map);
@@ -100,8 +94,6 @@ void simulation() {
     while (total_min_value < 100 && !base_found) {
         t_tree mytree = getTree(&map, rover);
         t_node* min = minLocalisation(mytree.root, NULL, map);
-
-        printf("\nGenerated Tree:\n");
         if (map.costs[min->local.pos.y][min->local.pos.x] == 0) {
             if (total_min_value == 0){
                 total_min_value = min->value;

@@ -154,7 +154,6 @@ void path(t_tree tree, t_map map) {
     t_node *min = NULL;
     min = minLocalisation(tree.root, min, map);
     printPath(min, map);
-    printPathSimple(min, map);
 }
 
 t_localisation goToArea(t_node *feuille, t_map map, t_localisation rover) {
@@ -173,7 +172,6 @@ void printPath(t_node *feuille, t_map map) {
     if (feuille->parent != NULL) {
         printPath(feuille->parent, map);
     }
-    printf("%s -->", getMoveAsString(feuille->move));
     if (feuille->move == NONE) {
         printf("Initialisation du rover :\n");
     } else if (map.costs[feuille->local.pos.y][feuille->local.pos.x] == 0) {
