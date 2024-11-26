@@ -13,7 +13,11 @@ Chaque mouvements possède
 - Implémentation d'un arbre n-aire où chaque noeuds correspond à un mouvement potentiel fait par le rover.
 - Calcul du chemin entre la feuille la plus petite d'un arbre n-aire et sa racine.
 - Identification d'obstacles et applications des effets appropriés sur le rover.
-- 
+- Tirage au hasard des mouvements et modification des probabilités
+- Possibilité d'utiliser plusieurs maps sans problèmes
+- Calcul du temps d'éxécution d'une fonction
+- Vérification de l'arrivée à la base
+- Modification de la position du rover en fin de phase
 
 ## 🛠️ Fonctionnalités
 
