@@ -58,11 +58,16 @@ void moveProbaInit(int proba[]);
 */
 t_map getRandomMap();
 
-
+/**
+ * @brief fonction simulant le trajet du rover jusqu'à sa base, sur une map aléatoire
+ * @return none
+*/
 void simulation();
 
-
+/**
+ * @brief fonction affichant un arbre taille réduite des mouvements du rover, sur une map aléatoire
+ * @return none
+*/
 void NTreePrintExemple();
-
 
 #endif //ROVER_RUN_INITIALIZE_H
