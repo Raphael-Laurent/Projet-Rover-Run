@@ -3,12 +3,16 @@
 <br><br>
 
 ## Description :
-Ce repository a été créé dans le cadre de notre projet semestriel lors de notre deuxième année de Programme Grande Ecole Ingénieurs à l'EFREI. Nous avons dû réaliser **une simulation de déplacement d'un rover** sur Mars qui doit prendre en compte le terrain sur lequel il évolue et la quantité de fuel qu'il consomme afin de rejoindre sa base.  
-Les fichiers loc, map, 
+Ce repository a été créé dans le cadre de notre projet semestriel lors de notre deuxième année de Programme Grande Ecole Ingénieurs à l'EFREI. Nous avons dû réaliser **une simulation de déplacement d'un rover** sur Mars qui doit prendre en compte le terrain sur lequel il évolue et la quantité de fuel qu'il consomme afin de rejoindre sa base.  <br><br>
+Le rover se déplace en phases, où une liste de mouvements sont tirés au sort à chaque fois.  
+Comme choix de mouvements il a : **F_10** (avancer de 10m), **F_20** (avancer de 20m), **F_30** (avancer de 30m), **B_10** (reculer de 10m), **T_RIGHT** (tourner à droite), **T_LEFT** (tourner à gauche) et **U_TURN** (se retourner).  
+Chaque mouvements possède 
+
 
 ## Fonctionnalités :
 - Implémentation d'un arbre n-aire où chaque noeuds correspond à un mouvement potentiel fait par le rover.
 - Calcul du chemin entre la feuille la plus petite d'un arbre n-aire et sa racine.
+- Identification d'obstacles et applications des effets appropriés sur le rover.
 - 
 
 ## 🛠️ Fonctionnalités
