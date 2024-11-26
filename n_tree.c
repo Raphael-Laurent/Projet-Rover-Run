@@ -206,4 +206,3 @@ void deleteNode(t_node *node) {
     free(node->avails);
     free(node);
 }
-

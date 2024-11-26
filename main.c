@@ -4,34 +4,28 @@
 #include "moves.h"
 #include "initialize.h"
 
-int main() {
+void simulation() {
     t_map map = getRandomMap();
-
-    printMapAndCost(&map);
-
-    printf("\n");
-
-    int proba[7];
-    moveProbaInit(proba);
-
-    t_localisation rover = loc_init(4, 3, NORTH);
-    displayNewRoverLocation(map, rover.pos.x, rover.pos.y);
-
     int total_min_value = 0;
     int base_found = 0;
+    int proba[7];
+    t_localisation rover = loc_init(4, 3, NORTH);
+
+    moveProbaInit(proba);
+    printMapAndCost(&map);
+    printf("\n");
+    displayNewRoverLocation(map, rover.pos.x, rover.pos.y);
 
     while (total_min_value < 100 && !base_found) {
         t_tree mytree = getTree(&map, rover);
+        t_node* min = minLocalisation(mytree.root, NULL, map);
 
         printf("\nGenerated Tree:\n");
-        //printNTree(mytree, map);
-
-        t_node *min = minLocalisation(mytree.root, NULL, map);
-
         if (map.costs[min->local.pos.y][min->local.pos.x] == 0) {
             printf("\nBase found at (%d, %d)!\n", min->local.pos.x, min->local.pos.y);
             base_found = 1;
-        } else {
+        }
+        else {
             total_min_value += min->value;
             printf("\nMoving rover to the next area (current sum of mins: %d):\n", total_min_value);
             rover = goToArea(min, map, rover);
@@ -39,13 +33,44 @@ int main() {
             displayNewRoverLocation(map, rover.pos.x, rover.pos.y);
         }
     }
-
     if (total_min_value >= 100) {
         printf("\nStopping condition met: Total sum of mins >= 100\n");
     }
     if (base_found) {
         printf("\nStopping condition met: Base found\n");
     }
+}
 
-    return 0;
+void NTreePrintExemple() {
+    t_localisation rover = loc_init(4, 3, NORTH);
+    t_map map = getRandomMap();
+    t_move* avails = (t_move*)malloc(sizeof(t_move) * NB_RAND_MOVES);
+    int move_proba[NONE];
+    moveProbaInit(move_proba);
+    randomMoves(move_proba, avails);
+    t_node* root = createNode(0, NB_RAND_MOVES, avails, 0, rover, NONE);
+    t_tree exTree = createNTree(root, 4, rover, map);
+    printNTree(exTree, map);
+    deleteTree(&exTree);
+}
+
+int main() {
+    // Interface
+    int input;
+    for (;;) {
+        printf("Select an option, print an exemple NTree (1), start a simulation (2) or quit (3): ");
+        scanf("%d", &input);
+        switch (input) {
+        case 1:
+            NTreePrintExemple();
+            break;
+        case 2:
+            simulation();
+            break;
+        case 3:
+            return 0;
+        default:
+            printf("Invalid input.\n");
+        }
+    }
 }
