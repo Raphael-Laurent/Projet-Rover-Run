@@ -4,8 +4,7 @@
 
 #include "loc.h"
 
-t_localisation loc_init(int x, int y, t_orientation ori)
-{
+t_localisation loc_init(int x, int y, t_orientation ori) {
     t_localisation loc;
     loc.pos.x = x;
     loc.pos.y = y;
@@ -13,40 +12,43 @@ t_localisation loc_init(int x, int y, t_orientation ori)
     return loc;
 }
 
-int isValidLocalisation(t_position loc, int x_max, int y_max)
-{
+int isValidLocalisation(t_position loc, int x_max, int y_max) {
     return (loc.x >= 0 && loc.x < x_max && loc.y >= 0 && loc.y < y_max);
 }
 
-t_position LEFT(t_position pos)
-{
+t_position LEFT(t_position pos) {
     t_position new_pos;
     new_pos.x = pos.x - 1;
     new_pos.y = pos.y;
     return new_pos;
 }
 
-t_position RIGHT(t_position pos)
-{
+t_position RIGHT(t_position pos) {
     t_position new_pos;
     new_pos.x = pos.x + 1;
     new_pos.y = pos.y;
     return new_pos;
 }
 
-t_position UP(t_position pos)
-{
+t_position UP(t_position pos) {
     t_position new_pos;
     new_pos.x = pos.x;
     new_pos.y = pos.y - 1;
     return new_pos;
 }
 
-t_position DOWN(t_position pos)
-{
+t_position DOWN(t_position pos) {
     t_position new_pos;
     new_pos.x = pos.x;
     new_pos.y = pos.y + 1;
     return new_pos;
 }
 
+char *getOriAsString(t_orientation ori) {
+    return _oris[ori];
+}
+
+void printLocalisation(t_localisation loc, t_map map) {
+    printf("\n-----------------------------------\nx : %d \ny : %d\norientation : %s\nval : %d\n", loc.pos.y, loc.pos.x,
+           getOriAsString(loc.ori), map.costs[loc.pos.y][loc.pos.x]);
+}
