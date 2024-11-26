@@ -12,37 +12,48 @@ int main() {
     t_map map = getRandomMap();
 
     printMapAndCost(&map);
-    // -----TEST------------------------------------------------------------------
-    //map.costs = les coûts
 
     printf("\n");
 
     int proba[7];
     moveProbaInit(proba);
 
-    /*
-    printTab(proba, 7); //Afficher les probabilités pour le debug
-    randomMoves(proba, tableau);
-    printRndMvs(tableau); //Afficher les moves pour le debug
-    printTab(proba, 7); //Afficher les probabilités pour le debug
-    */
+    t_localisation rover = loc_init(4, 3, NORTH);
+    displayNewRoverLocation(map, rover.pos.x, rover.pos.y);
 
-    t_localisation rover = loc_init(4,3, NORTH); //on initialise la position du rover
-    displayNewRoverLocation(map,rover.pos.x,rover.pos.y);
+    int total_min_value = 0;
+    int base_found = 0;
 
-    t_tree mytree = getTree(&map, rover, ROVER);
+    while (total_min_value < 100 && !base_found) {
+        t_tree mytree = getTree(&map, rover);
 
-    // Affichage de l'arbre
-    printf("\nArbre n-aire:\n");
-    printNTree(mytree, map);
+        printf("\nGenerated Tree:\n");
+        printNTree(mytree, map);
 
-    //Afficher le minimum de parcours
-    t_node *min = minLocalisation(mytree.root, min, map);
-    path(mytree, map);
-    printf("%d\n",min->value);
+        t_node *min = minLocalisation(mytree.root, NULL, map);
+
+        if (map.costs[min->local.pos.y][min->local.pos.x] == 0) {
+            printf("\nBase found at (%d, %d)!\n", min->local.pos.x, min->local.pos.y);
+            base_found = 1;
+        } else {
+            total_min_value += min->value;
+            printf("\nMoving rover to the next area (current sum of mins: %d):\n", total_min_value);
+            rover = goToArea(min, map, rover);
+            printf("\nRover's new position:\n");
+            displayNewRoverLocation(map, rover.pos.x, rover.pos.y);
+        }
+    }
+
+    if (total_min_value >= 100) {
+        printf("\nStopping condition met: Total sum of mins >= 100\n");
+    }
+    if (base_found) {
+        printf("\nStopping condition met: Base found\n");
+    }
 
     return 0;
 }
+
 
 void printTab(const int *tableau, int size) {
     for (int i = 0; i < size-1; i++) {

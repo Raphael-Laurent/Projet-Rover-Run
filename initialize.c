@@ -39,7 +39,7 @@ void printMapAndCost(t_map *map) {
     displayMap((*map));
 }
 
-t_tree getTree(t_map *map, t_localisation rover, t_soil id_case) {
+t_tree getTree(t_map *map, t_localisation rover) {
     // rajouter taille arbre dans paramètres fonctions + localisation pour rover
     t_move avails[NB_RAND_MOVES];
     int move_proba[NONE];

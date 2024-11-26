@@ -120,4 +120,7 @@ t_node *minLocalisation(t_node *current_node, t_node *min_node, t_map map);
 */
 void path(t_tree tree, t_map map);
 
+
+t_localisation goToArea(t_node *feuille, t_map map, t_localisation rover);
+
 #endif //UNTITLED1_N_TREE_H

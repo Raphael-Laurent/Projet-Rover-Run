@@ -155,6 +155,19 @@ void path(t_tree tree, t_map map) {
     printPathSimple(min, map);
 }
 
+t_localisation goToArea(t_node *feuille, t_map map, t_localisation rover) {
+    if (feuille == NULL) {
+        return rover;
+    }
+    if (feuille->parent != NULL) {
+        rover = goToArea(feuille->parent, map, rover);
+    }
+    rover = move(rover, feuille->move); //I like to move it move it
+    printf("The rover moves: %s\n", getMoveAsString(feuille->move));
+    return rover;
+}
+
+
 void printPath(t_node *feuille, t_map map) {
     if (feuille->parent != NULL) {
         printPath(feuille->parent, map);

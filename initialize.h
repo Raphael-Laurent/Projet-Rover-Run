@@ -23,7 +23,7 @@ void printMapAndCost(t_map *map);
  * @brief fonction pour créer l'arbre n-aire
  * @param *map : création de l'arbre en prenant en compte les coûts de la map
 */
-t_tree getTree(t_map *map, t_localisation rover, t_soil id_case);
+t_tree getTree(t_map *map, t_localisation rover);
 
 
 /**
