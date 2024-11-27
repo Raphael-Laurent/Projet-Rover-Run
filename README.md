@@ -2,6 +2,8 @@
 <sub>*Projet TI301 - Efrei semestre 3 (P2) || P2 2024-2025 || Projet en langage C* 
 <br><br>
 
+## Lien Github : https://github.com/Raphael-Laurent/Projet-Rover-Run.git
+
 ## Description :
 Ce repository a été créé dans le cadre de notre projet semestriel lors de notre deuxième année de Programme Grande Ecole Ingénieurs à l'EFREI. Nous avons dû réaliser **une simulation de déplacement d'un rover** sur Mars qui doit prendre en compte le terrain sur lequel il évolue et la quantité de fuel qu'il consomme afin de rejoindre sa base.  <br><br>
 
